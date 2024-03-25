@@ -1,10 +1,9 @@
 "use client"
-import Image from "next/image";
 import prisma from '@/lib/prisma';
 import { signIn } from 'next-auth/react';
 import { SessionProvider } from 'next-auth/react';
 import Header from "../components/Header/index";
-
+import {Image} from "@nextui-org/react";
 export default function Home() {
   // const user = await prisma.user.create({
   //   data: {
@@ -23,7 +22,10 @@ export default function Home() {
 
   return (
     <SessionProvider>
-      init
+      <Image
+        width={"100%"}
+        src={"/images/planetbg.svg"}
+      />
     </SessionProvider>
   );
 }

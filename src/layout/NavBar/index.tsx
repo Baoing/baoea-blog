@@ -1,24 +1,21 @@
 "use client"
 import React from "react";
 import {Logo} from "./Logo";
-
+import {SessionProvider} from 'next-auth/react';
 import {Navbar, NavbarBrand, NavbarMenuToggle, NavbarMenuItem, NavbarMenu, NavbarContent, NavbarItem, Link, Button} from "@nextui-org/react";
+import LoginModule from "@/components/Header/LoginModule";
 
 
-export default function App() {
+export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   const menuItems = [
-    "Profile",
-    "Dashboard",
-    "Activity",
-    "Analytics",
-    "System",
-    "Deployments",
-    "My Settings",
-    "Team Settings",
-    "Help & Feedback",
-    "Log Out",
+    "Projects",
+    "Articles",
+    "Collections",
+    "About",
+    // "Contact",
+    "Log out",
   ];
 
   return (
@@ -33,42 +30,41 @@ export default function App() {
 
       <NavbarContent className="sm:hidden pr-3" justify="center">
         <NavbarBrand>
-          <Logo />
-          <p className="font-bold text-inherit">ACME</p>
-        </NavbarBrand>
+          <Link color="foreground" href="/">
+
+          </Link>
+        </NavbarBrand><Logo />
+        <p className="font-bold text-inherit">BAOEA</p>
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarBrand>
-          <Logo />
-          <p className="font-bold text-inherit">ACME</p>
+          <Link color="foreground" href="/">
+            <Logo />
+            <p className="font-bold text-inherit">BAOEA</p>
+          </Link>
         </NavbarBrand>
-        <NavbarItem>
+        <NavbarItem className="ml-4">
           <Link color="foreground" href="#">
-            Features
+            Projects
+          </Link>
+        </NavbarItem>
+        <NavbarItem>
+          <Link color="foreground" href="/collections">
+            Collections
           </Link>
         </NavbarItem>
         <NavbarItem isActive>
-          <Link href="#" aria-current="page">
-            Customers
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            Integrations
+          <Link href="/about" aria-current="page">
+            About
           </Link>
         </NavbarItem>
       </NavbarContent>
 
       <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex">
-          <Link href="#">Login</Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Button as={Link} href="#" variant="flat">
-            Sign Up
-          </Button>
-        </NavbarItem>
+        <SessionProvider>
+          <LoginModule />
+        </SessionProvider>
       </NavbarContent>
 
       <NavbarMenu>
