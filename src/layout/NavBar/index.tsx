@@ -1,5 +1,6 @@
 "use client"
-import React from "react";
+import { usePathname } from 'next/navigation'
+import React, {useEffect, useState} from "react";
 import {Logo} from "./Logo";
 import {SessionProvider} from 'next-auth/react';
 import {Navbar, NavbarBrand, NavbarMenuToggle, NavbarMenuItem, NavbarMenu, NavbarContent, NavbarItem, Link, Button} from "@nextui-org/react";
@@ -8,6 +9,13 @@ import LoginModule from "@/components/Header/LoginModule";
 
 export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const pathname = usePathname()
+  console.log(pathname)
+  const [activeItem, setActiveItem] = useState("")
+  useEffect(()=> {
+    setActiveItem(pathname)
+  }, [pathname])
+
 
   const menuItems = [
     "Projects",
@@ -31,10 +39,10 @@ export default function NavBar() {
       <NavbarContent className="sm:hidden pr-3" justify="center">
         <NavbarBrand>
           <Link color="foreground" href="/">
-
+            <Logo />
+            <p className="font-bold text-inherit">BAOEA</p>
           </Link>
-        </NavbarBrand><Logo />
-        <p className="font-bold text-inherit">BAOEA</p>
+        </NavbarBrand>
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
@@ -44,18 +52,21 @@ export default function NavBar() {
             <p className="font-bold text-inherit">BAOEA</p>
           </Link>
         </NavbarBrand>
-        <NavbarItem className="ml-4">
-          <Link color="foreground" href="#">
+        <NavbarItem
+          className="ml-4"
+          isActive={activeItem === "/projects"}
+        >
+          <Link color={activeItem === "/projects" ? "" :"foreground"} href="/projects"  aria-current="page">
             Projects
           </Link>
         </NavbarItem>
-        <NavbarItem>
-          <Link color="foreground" href="/collections">
+        <NavbarItem isActive={activeItem === "/collections"}>
+          <Link color={activeItem === "/collections" ? "" :"foreground"} href="/collections">
             Collections
           </Link>
         </NavbarItem>
-        <NavbarItem isActive>
-          <Link href="/about" aria-current="page">
+        <NavbarItem isActive={activeItem === "/about"}>
+          <Link color={activeItem === "/about" ? "" :"foreground"} href="/about">
             About
           </Link>
         </NavbarItem>
