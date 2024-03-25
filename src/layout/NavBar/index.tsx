@@ -10,7 +10,7 @@ import LoginModule from "@/components/Header/LoginModule";
 export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const pathname = usePathname()
-  console.log(pathname)
+
   const [activeItem, setActiveItem] = useState("")
   useEffect(()=> {
     setActiveItem(pathname)
@@ -56,17 +56,17 @@ export default function NavBar() {
           className="ml-4"
           isActive={activeItem === "/projects"}
         >
-          <Link color={activeItem === "/projects" ? "" :"foreground"} href="/projects"  aria-current="page">
+          <Link color={activeItem === "/projects" ? undefined :"foreground"} href="/projects"  aria-current="page">
             Projects
           </Link>
         </NavbarItem>
         <NavbarItem isActive={activeItem === "/collections"}>
-          <Link color={activeItem === "/collections" ? "" :"foreground"} href="/collections">
+          <Link color={activeItem === "/collections" ? undefined :"foreground"} href="/collections">
             Collections
           </Link>
         </NavbarItem>
         <NavbarItem isActive={activeItem === "/about"}>
-          <Link color={activeItem === "/about" ? "" :"foreground"} href="/about">
+          <Link color={activeItem === "/about" ? undefined :"foreground"} href="/about">
             About
           </Link>
         </NavbarItem>

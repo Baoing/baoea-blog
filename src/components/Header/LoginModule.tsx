@@ -17,7 +17,7 @@ const LoginModule = () => {
             <DropdownTrigger>
               <div className={"flex gap-4 items-center"}>
                 {data.user?.name}
-                <Avatar src={data.user?.image} />
+                <Avatar src={data.user?.image || ""} />
               </div>
             </DropdownTrigger>
           </NavbarItem>
@@ -25,7 +25,7 @@ const LoginModule = () => {
             <DropdownItem href={"/setting"}>
                 Profiles
             </DropdownItem>
-            <DropdownItem onClick={signOut}>
+            <DropdownItem onPress={((e:any) => signOut)}>
                 Sign out
             </DropdownItem>
           </DropdownMenu>
