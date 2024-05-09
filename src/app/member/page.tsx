@@ -1,5 +1,5 @@
 "use client"
-import { Button } from "@nextui-org/react";
+import { Button, Input, Divider } from "@nextui-org/react";
 const token = "rTZ0FBp+Pb0ihvRN3DH9EoyYFjVk3CNyaQGo753SV+AYx7gaIsMWwtW1tjfYrfJb"
   
   const postData = JSON.stringify({
@@ -85,9 +85,21 @@ export default function Member() {
     }
 
     return <div className="p-5">
-        {/* <div>token：{token}</div> */}
-        <Button onClick={handleAddbooking}>
-            抢购
-        </Button>
+      <div className="mb-4">        
+        <Input
+          type="phone"
+          label="Phone"
+          className="max-w-sm"
+        />
+        <Button className="mt-2">获取Token</Button>
+      </div>
+
+      <Divider />
+      <div className="mt-2">
+      {/* <div>token：{token}</div> */}
+      <Button className="mt-2" onClick={handleAddbooking}>
+          抢购停车券
+      </Button>
+      </div>
     </div>
 }

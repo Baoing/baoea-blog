@@ -65,7 +65,6 @@ export async function sendRequest({method = "POST", body = {}, token, url}:sendR
       const responseData = await response.json();
       console.log(responseData)
 
-      
       return responseData.data
     } catch (error) {
       return false
