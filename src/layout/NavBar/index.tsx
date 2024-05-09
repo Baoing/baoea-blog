@@ -60,16 +60,16 @@ export default function NavBar() {
             Projects
           </Link>
         </NavbarItem>
-        <NavbarItem isActive={activeItem === "/collections"}>
-          <Link color={activeItem === "/collections" ? undefined :"foreground"} href="/collections">
-            Collections
+        <NavbarItem isActive={activeItem === "/bestwehotel"}>
+          <Link color={activeItem === "/bestwehotel" ? undefined :"foreground"} href="/bestwehotel">
+            Bestwehotel
           </Link>
         </NavbarItem>
-        <NavbarItem isActive={activeItem === "/about"}>
+        {/* <NavbarItem isActive={activeItem === "/about"}>
           <Link color={activeItem === "/about" ? undefined :"foreground"} href="/about">
             About
           </Link>
-        </NavbarItem>
+        </NavbarItem> */}
       </NavbarContent>
 
       <NavbarContent justify="end">
