@@ -65,6 +65,11 @@ export default function NavBar() {
             Bestwehotel
           </Link>
         </NavbarItem>
+        <NavbarItem isActive={activeItem === "/member"}>
+          <Link color={activeItem === "/member" ? undefined :"foreground"} href="/member">
+            Member
+          </Link>
+        </NavbarItem>
         {/* <NavbarItem isActive={activeItem === "/about"}>
           <Link color={activeItem === "/about" ? undefined :"foreground"} href="/about">
             About

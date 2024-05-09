@@ -1,7 +1,6 @@
 "use client"
 import React from "react";
 import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, getKeyValue} from "@nextui-org/react";
-import { log } from "console";
 import { postRequest } from "@/lib/request";
 
 const tokenList = [

@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import {getInfo} from "../../common/bestwehotelApis"
+
 type ResponseData = {
   list: any[]; // 根据你的数据结构定义
 };
