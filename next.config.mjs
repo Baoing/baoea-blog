@@ -9,6 +9,9 @@ const rewrites = () => {
   };
   
 const nextConfig = {
+    plugins:[
+
+    ],
     rewrites,
     eslint: {
       ignoreDuringBuilds: true, // 忽略 eslint 检查

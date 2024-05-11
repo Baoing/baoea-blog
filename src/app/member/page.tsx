@@ -1,5 +1,11 @@
 "use client"
 import { Button, Input, Divider } from "@nextui-org/react";
+import Login from "@/app/member/login";
+
+import { Observer, Provider as MobxProvider} from "mobx-react"
+import stores from "@/stores";
+
+
 const token = "rTZ0FBp+Pb0ihvRN3DH9EoyYFjVk3CNyaQGo753SV+AYx7gaIsMWwtW1tjfYrfJb"
   
   const postData = JSON.stringify({
@@ -84,14 +90,13 @@ export default function Member() {
         })
     }
 
+    const { MembersStore } = stores
+
+  console.log(MembersStore.users)
+
     return <div className="p-5">
-      <div className="mb-4">        
-        <Input
-          type="phone"
-          label="Phone"
-          className="max-w-sm"
-        />
-        <Button className="mt-2">获取Token</Button>
+      <div className="mb-4">
+        <Login />
       </div>
 
       <Divider />

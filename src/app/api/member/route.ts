@@ -1,6 +1,3 @@
-import { log } from "console";
-
-
 
 const postData = JSON.stringify({
     "clientInfo": {
