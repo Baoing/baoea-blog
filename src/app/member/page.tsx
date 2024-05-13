@@ -7,7 +7,6 @@ import {addBooking} from "@/utils/api"
 import { Observer, Provider as MobxProvider} from "mobx-react"
 import stores from "@/stores";
 import {getParkingCoupon} from "./metadata"
-import { log } from "console";
 import { toast } from "sonner";
 
   
@@ -72,6 +71,10 @@ export default function Member() {
                     
                     <Button className="w-[100px]" onClick={() => handleAddbooking(user.token)}>
                         抢购迪士尼
+                    </Button>
+                    
+                    <Button className="w-[100px]" onClick={() => handleAddbooking(user.token)}>
+                        领取100积分
                     </Button>
                   </CardBody>
                 </Card>  

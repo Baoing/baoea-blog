@@ -1,0 +1,68 @@
+// 金卡商品的请求链接/sku
+https://malls.bestwehotel.com/#/goodsDetail?productId=78757&priceStrategy=20094&sid=957564&sid=365352
+
+{"clientInfo":{"lbs":",","phoneType":"","appVersion":"","deviceId":"","sysCode":"","browserType":"Netscape","sysType":"MacIntel","channelId":"","platformId":"","sid":365352,"activityId":"","channel":2001},"productId":"78757","channel":2001,"priceStrategy":"20094","isNormal":0}
+
+
+{
+    "msg": "请求成功",
+    "code": 200,
+    "data": {
+        "skuProperties": [
+            {
+                "valueList": [
+                    {
+                        "vId": 539331,
+                        "proValue": "金卡",
+                        "stock": 0
+                    }
+                ],
+                "pId": 10000,
+                "proName": "规格"
+            }
+        ],
+        "skuInfos": [
+            {
+                "priceToPoint": 0,
+                "virtualType": 10,
+                "jdSkuId": null,
+                "hongBaoPrice": null,
+                "regularPrice": 19900,
+                "finalPrice": null,
+                "priceStrategy": 20094,
+                "activityCustomPrice": 9900,
+                "activeMaxBuyStock": 1,
+                "orderRequired": 0,
+                "regularPoints": 19900,
+                "handPrice": null,
+                "proName": "金卡加赠5000积分（会员日）",
+                "activeFavorPoints": 0,
+                "stock": 0,
+                "skuId": 179131,
+                "realFlag": 0,
+                "favorPrice": 0,
+                "goldCardEnjoyedDeduction": null,
+                "areaPoints": null,
+                "maxSaleQty": 3,
+                "priceType": 1,
+                "goldCardFlag": null,
+                "activeFavorPrice": 0,
+                "purePoints": 0,
+                "skuImg": "https://imgs.bestwehotel.com/images/inn/1fPsDcu9KG",
+                "promotPrice": 9900,
+                "growTimes": 0,
+                "jdImages": null,
+                "favorPoints": 0,
+                "properties": "10000:539331",
+                "ratio": 0.01
+            }
+        ],
+        "stock": 0
+    },
+    "systemTime": 1715271436123
+}
+
+
+
+获取积分数量
+https://malls.bestwehotel.com/plateno_mall/user/getPoint

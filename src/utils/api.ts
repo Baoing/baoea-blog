@@ -48,3 +48,34 @@ export async function addBooking({headers, body}: any) {
   }
 }
 
+
+
+export async function getLishengImgCode(mobile: string, picVerifyCode?: string) {
+  let url = "https://mkt.bestwehotel.com/proxy/mkt-toolkit/gift-act/member/sms-validate-code?mobile="+mobile
+  if(picVerifyCode) {
+    url += `&picVerifyCode=${picVerifyCode}`
+  }
+  try {
+    return await post<any>('/api/proxy', {
+      url
+    })
+    // 在这里对返回的数据进行处理
+  } catch (error) {
+    console.error('POST请求失败:', error);
+  }
+}
+
+
+
+export async function getLishengLingqu(mobile: string, code?: string) {
+  let url = `https://mkt.bestwehotel.com/proxy/mkt-toolkit/gift-act/member/login-and-get?actId=LBL00343&mobile=${mobile}&vcode=`+code
+  try {
+    return await post<any>('/api/proxy', {
+      url
+    })
+    // 在这里对返回的数据进行处理
+  } catch (error) {
+    console.error('POST请求失败:', error);
+  }
+}
+

@@ -1,3 +1,12 @@
+export const headers = {
+    'uniType': '10000011',
+    'authType': '5',
+    'Accept': 'application/json, text/plain, */*',
+    'Content-Type': 'application/json;charset=utf-8',
+    'Accept-Language': 'zh-CN,zh-Hans;q=0.9',
+    'blackBox': 'undefined',
+}
+
 /**
  * 获取抢购停车券的header和data
  */
@@ -135,3 +144,6 @@ export const getParkingCoupon = (token: string) => {
         }
     }
 }
+
+
+// export const 

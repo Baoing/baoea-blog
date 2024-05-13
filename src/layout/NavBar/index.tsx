@@ -70,11 +70,11 @@ export default function NavBar() {
             Member
           </Link>
         </NavbarItem>
-        {/* <NavbarItem isActive={activeItem === "/about"}>
-          <Link color={activeItem === "/about" ? undefined :"foreground"} href="/about">
+        <NavbarItem isActive={activeItem === "/lisheng"}>
+          <Link color={activeItem === "/lisheng" ? undefined :"foreground"} href="/lisheng">
             About
           </Link>
-        </NavbarItem> */}
+        </NavbarItem>
       </NavbarContent>
 
       {/* <NavbarContent justify="end">
