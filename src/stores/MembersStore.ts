@@ -1,5 +1,5 @@
 import {action, makeAutoObservable, observable} from "mobx"
-import {getInfoByToken} from "@/utils/api";
+import {getCoupon, getCoupon100, getCoupon300, getInfoByToken} from "@/utils/api";
 import {toast} from "sonner";
 import { log } from "console";
 
@@ -19,22 +19,19 @@ export type MembersStoreProps = {
 }
 
 export default class MembersStore implements MembersStoreProps {
-  @observable users:Member[] = [{token: "xxxxx",   data: {
-    head: "x",
-    mebName: "xxx",
-    mebPoint: 1000,
-    memberMap: "12",
-    mobile: "18779580591",
-    nickname: "xxx"
-  }}]
+  @observable users:Member[] = []
 
   constructor() {
     // 使用这个才会在 MobX 6 上才会更新视图
+    const tokens = window.localStorage.getItem("bao-tokens")
+    // 初始化
+    tokens && tokens.split(",").map(token=> this.addMember(token))
     makeAutoObservable(this)
   }
 
   @action.bound
   addMember(token:string) {
+    if(!token) return
     console.log("所添加Token",token)
     const noToken = this.users.findIndex(user=> user.token === token) === -1
 
@@ -48,7 +45,32 @@ export default class MembersStore implements MembersStoreProps {
           }else{
             this.users = [...this.users, {token, data}]
           }
-          console.log(this.users)
+
+          const tokens = this.users.map(item=>item.token).toString()
+          window.localStorage.setItem("bao-tokens", tokens)
+
+          getCoupon(token).then((res)=>{
+            if(res.code===200){
+              toast.success('100积分领取成功或者超出：'+ res.data.msg)
+            }else{
+              toast.error('100积分领券失败,' + res.msg)
+            }
+          })
+          getCoupon300(token).then((res)=>{
+            if(res.code===200){
+              toast.success('领取300无门槛：'+ res.data.msg)
+            }else{
+              toast.error('领取300无门槛失败,' + res.msg)
+            }
+          })
+          getCoupon100(token).then((res) => {
+            if(res.code===200){
+              toast.success('领取100无门槛：'+ res.data.msg)
+            }else{
+              toast.error('领取100无门槛失败,' + res.msg)
+            }
+          });
+
         }else{
           toast.error(msg + ", Token错误或者已过期")
         }

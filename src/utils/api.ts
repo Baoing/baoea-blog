@@ -48,6 +48,110 @@ export async function addBooking({headers, body}: any) {
   }
 }
 
+/**
+ * 获取100积分
+ * @param token
+ */
+export async function getCoupon(token: string) {
+  let url = `https://malls.bestwehotel.com/plateno_mall/common/proxy/module-couponPick`
+
+  const requestBody ={"clientInfo":{"lbs":",","phoneType":"","appVersion":"","deviceId":"","sysCode":"","browserType":"Netscape","sysType":"MacIntel","channelId":"","platformId":"","sid":574582,"activityId":"","channel":2001},"couponActivityId":45832}
+
+  try {
+    return await post<any>('/api/proxy', {
+      url,
+      ...requestBody
+    }, {
+      'uniType': '10000011',
+          'authType': '5',
+          // 'Host': 'malls.bestwehotel.com',
+          'Accept': 'application/json, text/plain, */*',
+          'Content-Type': 'application/json;charset=utf-8',
+          'Accept-Language': 'zh-CN,zh-Hans;q=0.9',
+          'blackBox': 'undefined',
+          token,
+    },)
+    // 在这里对返回的数据进行处理
+  } catch (error) {
+    console.error('POST请求失败:', error);
+  }
+}
+
+/**
+ * 领取300无门槛
+ * @param token
+ */
+export async function getCoupon300(token: string) {
+  let url = `https://malls.bestwehotel.com/plateno_mall/common/proxy/module-couponPick`
+  const requestBody ={"clientInfo":{"lbs":",","phoneType":"","appVersion":"","deviceId":"","sysCode":"","browserType":"Netscape","sysType":"MacIntel","channelId":"","platformId":"","sid":574582,"activityId":"","channel":2001},"couponActivityId":45828}
+
+  try {
+    return await post<any>('/api/proxy', {
+      url,
+      ...requestBody
+    }, {
+      'uniType': '10000011',
+          'authType': '5',
+          'Accept': 'application/json, text/plain, */*',
+          'Content-Type': 'application/json;charset=utf-8',
+          'Accept-Language': 'zh-CN,zh-Hans;q=0.9',
+          'blackBox': 'undefined',
+          token,
+    },)
+    // 在这里对返回的数据进行处理
+  } catch (error) {
+    console.error('POST请求失败:', error);
+  }
+}
+
+
+/**
+ * 领取100无门槛
+ * @param token
+ */
+export async function getCoupon100(token: string) {
+  let url = `https://malls.bestwehotel.com/plateno_mall/common/proxy/module-couponPick`
+  const requestBody ={
+    "clientInfo": {
+      "lbs": ",",
+      "phoneType": "iPad13,18",
+      "appVersion": "5.8.5",
+      "sysCode": "16.5.1",
+      "browserType": "Netscape",
+      "sysType": "iPad",
+      "channelId": "309488",
+      "platformId": "",
+      "sid": 365348,
+      "activityId": "",
+      "channel": 3001
+    },
+    "actId": 95,
+    "channel": 3001,
+    "couponId": 31100
+  }
+
+  try {
+    return await post<any>('/api/proxy', {
+      url,
+      ...requestBody
+    }, {
+      'uniType': '10000011',
+          'authType': '5',
+          'Accept': 'application/json, text/plain, */*',
+          'Content-Type': 'application/json;charset=utf-8',
+          'Accept-Language': 'zh-CN,zh-Hans;q=0.9',
+          'blackBox': 'undefined',
+          token,
+    },)
+    // 在这里对返回的数据进行处理
+  } catch (error) {
+    console.error('POST请求失败:', error);
+  }
+}
+
+
+
+
 
 
 export async function getLishengImgCode(mobile: string, picVerifyCode?: string) {

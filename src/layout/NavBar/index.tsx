@@ -72,7 +72,7 @@ export default function NavBar() {
         </NavbarItem>
         <NavbarItem isActive={activeItem === "/lisheng"}>
           <Link color={activeItem === "/lisheng" ? undefined :"foreground"} href="/lisheng">
-            About
+            LiSheng
           </Link>
         </NavbarItem>
       </NavbarContent>

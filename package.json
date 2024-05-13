@@ -13,6 +13,7 @@
     "@nextui-org/react": "^2.3.6",
     "@prisma/client": "^5.11.0",
     "axios": "^1.6.8",
+    "copy-to-clipboard": "^3.3.3",
     "framer-motion": "^11.1.7",
     "mobx": "^6.12.3",
     "mobx-react": "^9.1.1",

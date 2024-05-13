@@ -3,6 +3,7 @@ import { Button, Input, Tabs, Tab, Card, CardBody, CardHeader, Divider } from "@
 import Login from "@/app/member/login";
 import TokenLogin from "@/app/member/tokenLogin";
 import {addBooking} from "@/utils/api"
+import copy from 'copy-to-clipboard'
 
 import { Observer, Provider as MobxProvider} from "mobx-react"
 import stores from "@/stores";
@@ -22,6 +23,13 @@ export default function Member() {
           toast(msg)
         })
 
+    }
+
+    const copyToClipboard = (content: string) => {
+        // Get the value of the `value` attribute of the <Input> component
+        // copy(this.myInput.value)
+        copy(content)
+        toast.success("复制成功")
     }
 
     const { MembersStore } = stores
@@ -59,8 +67,11 @@ export default function Member() {
                   <CardHeader className="flex gap-3">
                     <div className="flex flex-col">
                       <p className="text-small text-default-500">手机号：{user.data.mobile}</p>
-                      {/* <p className="text-small text-default-500">Token：{user.token}</p> */}
                       <p className="text-small text-default-500">剩余积分：{user.data.mebPoint}</p>
+                       <p className="text-small text-default-500 flex gap-2 items-center">
+                           <span>Token：{user.token.slice(0,20)}...</span>
+                           <Button size={"sm"} onClick={() => copyToClipboard(user.token)}>复制</Button>
+                       </p>
                     </div>
                   </CardHeader>
                   <Divider/>
@@ -71,10 +82,6 @@ export default function Member() {
                     
                     <Button className="w-[100px]" onClick={() => handleAddbooking(user.token)}>
                         抢购迪士尼
-                    </Button>
-                    
-                    <Button className="w-[100px]" onClick={() => handleAddbooking(user.token)}>
-                        领取100积分
                     </Button>
                   </CardBody>
                 </Card>  
