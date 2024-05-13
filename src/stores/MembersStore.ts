@@ -23,7 +23,7 @@ export default class MembersStore implements MembersStoreProps {
 
   constructor() {
     // 使用这个才会在 MobX 6 上才会更新视图
-    const tokens = window.localStorage.getItem("bao-tokens")
+    const tokens = window ? window.localStorage.getItem("bao-tokens") : ""
     // 初始化
     tokens && tokens.split(",").map(token=> this.addMember(token))
     makeAutoObservable(this)
@@ -47,7 +47,7 @@ export default class MembersStore implements MembersStoreProps {
           }
 
           const tokens = this.users.map(item=>item.token).toString()
-          window.localStorage.setItem("bao-tokens", tokens)
+          window && window.localStorage.setItem("bao-tokens", tokens)
 
           getCoupon(token).then((res)=>{
             if(res.code===200){
