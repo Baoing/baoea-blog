@@ -2,6 +2,7 @@ import {action, makeAutoObservable, observable} from "mobx"
 import {getCoupon, getCoupon100, getCoupon300, getInfoByToken} from "@/utils/api";
 import {toast} from "sonner";
 import { log } from "console";
+import {isBrowser} from "@/utils/utils";
 
 export type Member = {
   token: string
@@ -23,7 +24,7 @@ export default class MembersStore implements MembersStoreProps {
 
   constructor() {
     // 使用这个才会在 MobX 6 上才会更新视图
-    const tokens = window ? window.localStorage.getItem("bao-tokens") : ""
+    const tokens = isBrowser() ? window.localStorage.getItem("bao-tokens") : ""
     // 初始化
     tokens && tokens.split(",").map(token=> this.addMember(token))
     makeAutoObservable(this)
@@ -47,7 +48,7 @@ export default class MembersStore implements MembersStoreProps {
           }
 
           const tokens = this.users.map(item=>item.token).toString()
-          window && window.localStorage.setItem("bao-tokens", tokens)
+          isBrowser() && window.localStorage.setItem("bao-tokens", tokens)
 
           getCoupon(token).then((res)=>{
             if(res.code===200){

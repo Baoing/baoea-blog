@@ -14,7 +14,6 @@ import { toast } from "sonner";
 export default function Member() {
     const handleAddbooking = (token: string) => {
         const {headers, body} = getParkingCoupon(token)
-        console.log(headers)
 
         addBooking({
           headers,
