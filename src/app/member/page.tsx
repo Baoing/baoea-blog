@@ -1,110 +1,84 @@
 "use client"
-import { Button, Input, Divider } from "@nextui-org/react";
+import { Button, Input, Tabs, Tab, Card, CardBody, CardHeader, Divider } from "@nextui-org/react";
 import Login from "@/app/member/login";
+import TokenLogin from "@/app/member/tokenLogin";
+import {addBooking} from "@/utils/api"
 
 import { Observer, Provider as MobxProvider} from "mobx-react"
 import stores from "@/stores";
+import {getParkingCoupon} from "./metadata"
+import { log } from "console";
+import { toast } from "sonner";
 
-
-const token = "rTZ0FBp+Pb0ihvRN3DH9EoyYFjVk3CNyaQGo753SV+AYx7gaIsMWwtW1tjfYrfJb"
   
-  const postData = JSON.stringify({
-    "clientInfo": {
-      "lbs": ",",
-      "phoneType": "",
-      "appVersion": "",
-      "deviceId": "",
-      "sysCode": "",
-      "browserType": "Netscape",
-      "sysType": "Win32",
-      "channelId": "",
-      "platformId": "",
-      "sid": 574582,
-      "activityId": "",
-      "channel": 2001
-    },
-    "chainID": null,
-    "packetReduceMoney": null,
-    "activityReduceAmount": 0,
-    "point": 9,
-    "totalAmount": 0,
-    "consigneeName": "",
-    "consigneeMobile": "",
-    "consigneeAddress": "",
-    "chanelId": 101,
-    "shippingType": 1,
-    "resource": 2001,
-    "couponId": "",
-    "province": "",
-    "city": "",
-    "area": "",
-    "offline": 0,
-    "goodsList": [
-      {
-        "goodsId": 179101,
-        "quantity": 1,
-        "priceType": 3,
-        "gift": 0,
-        "present": 0,
-        "priceStrategy": 20088,
-        "entrance": null,
-        "pureIntegralId": null,
-        "pointActivityId": null,
-        "usePointNums": "9",
-        "activityId": "20088",
-        "activityType": "1"
-      }
-    ],
-    "orderResource": "1",
-    "deductPoint": 9,
-    "isVirtual": 1,
-    "rechargeAccount": "",
-    "postageCouponId": "",
-    "discountType": 0,
-    "flowType": 0,
-    "postageCouponNum": 0,
-    "orderRemark": "",
-    "orderRequiredValue": "[]"
-  });
-
-const headers = {
-    'Content-Type': 'application/json',
-    'Content-Length': postData.length,
-    "authType": "5",
-    "token": "rTZ0FBp+Pb0ihvRN3DH9EoyYFjVk3CNyaQGo753SV+AYx7gaIsMWwtW1tjfYrfJb",
-    "uniType": "10000011",
-    'Cookie': 'gdp_user_id=768e81e8-7465-4940-afbb-99b7505764df; 989d198a589474f0_gdp_session_id=a8d4b7c9-9c75-4237-ab45-4892a6a6f250; HWWAFSESID=fff9e73bcf772ed38e; HWWAFSESTIME=1714701550570; token=rTZ0FBp+Pb0ihvRN3DH9EoyYFjVk3CNyaQGo753SV+AYx7gaIsMWwtW1tjfYrfJb; Hm_lvt_9f2ae361d92de34235f5d20dda95b0bd=1714701553; Hm_lpvt_9f2ae361d92de34235f5d20dda95b0bd=1714701588; 9AD585D8A7CB034A=4Hgns1aG-1714701589688-ba6ffcdfcf8692015583756; 1735D64331DF397E=JOoY2ySsqFFxh61vv4Tsm%2FmRoh3SrEcwFychknVlFmP8wcyfphryzkuaxBMvD9N7SZ7X9Xi2uSlB27NJNqWvdw%3D%3D; _xid=l0K6kEi%2BJ5wxRC99GTN0H%2F1x%2BU1tHK3C3MjmZNLN0SE%3D; 989d198a589474f0_gdp_sequence_ids=%7B%22globalKey%22%3A12%2C%22PAGE%22%3A7%2C%22CUSTOM%22%3A6%7D; 989d198a589474f0_gdp_session_id_a8d4b7c9-9c75-4237-ab45-4892a6a6f250=true',
-};
-  
-
 export default function Member() {
+    const handleAddbooking = (token: string) => {
+        const {headers, body} = getParkingCoupon(token)
+        console.log(headers)
 
-    const handleAddbooking = () => {
-        fetch("/api/member", {
-            method: "POST",
-            body: postData,
-            headers
-        }).then(res => {
-            const data = res.json()
-            console.log(data)
+        addBooking({
+          headers,
+          body
+        }).then(({code, msg, data})=>{
+          toast(msg)
         })
+
     }
 
     const { MembersStore } = stores
 
-  console.log(MembersStore.users)
+    return <Observer>{()=>{
+      return <div className="p-5">
+        <Tabs aria-label="Options">
+          <Tab key="password" title="账户密码登录">
+            <Card>
+              <CardBody>
+                <Login />
+              </CardBody>
+            </Card>  
+          </Tab>
+          
+          <Tab key="token" title="Token登录">
+            <Card>
+              <CardBody>
+                <TokenLogin />
+              </CardBody>
+            </Card>  
+          </Tab>
+        </Tabs>
 
-    return <div className="p-5">
-      <div className="mb-4">
-        <Login />
-      </div>
+      <Divider className="mb-4" />
 
-      <Divider />
-      <div className="mt-2">
-      {/* <div>token：{token}</div> */}
-      <Button className="mt-2" onClick={handleAddbooking}>
-          抢购停车券
-      </Button>
-      </div>
+      {
+        MembersStore.users.length <=0
+        ?<div className="p-4">暂未登录账户</div>
+        : <Tabs aria-label="Options">
+          {
+            MembersStore.users.map(user => 
+              <Tab key={user.data.mobile} title={user.data.mobile}>
+                <Card>
+                  <CardHeader className="flex gap-3">
+                    <div className="flex flex-col">
+                      <p className="text-small text-default-500">手机号：{user.data.mobile}</p>
+                      {/* <p className="text-small text-default-500">Token：{user.token}</p> */}
+                      <p className="text-small text-default-500">剩余积分：{user.data.mebPoint}</p>
+                    </div>
+                  </CardHeader>
+                  <Divider/>
+                  <CardBody className="flex gap-2 flex-row flex-wrap">
+                    <Button className="w-[100px]" onClick={() => handleAddbooking(user.token)}>
+                        抢购停车券
+                    </Button>
+                    
+                    <Button className="w-[100px]" onClick={() => handleAddbooking(user.token)}>
+                        抢购迪士尼
+                    </Button>
+                  </CardBody>
+                </Card>  
+              </Tab>)
+          }
+        </Tabs>
+      }
     </div>
+    }}</Observer>
 }

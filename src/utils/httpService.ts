@@ -13,9 +13,9 @@ export async function get<T>(url: string): Promise<T> {
 }
 
 // 封装POST请求
-export async function post<T>(url: string, data: any): Promise<T> {
+export async function post<T>(url: string, data: any, headers?: any): Promise<T> {
   try {
-    const response: AxiosResponse<T> = await axios.post(url, data);
+    const response: AxiosResponse<T> = await axios.post(url, data, {headers});
     return response.data;
   } catch (error) {
     console.error('Error while making POST request:', error);

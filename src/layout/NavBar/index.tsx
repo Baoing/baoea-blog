@@ -52,7 +52,7 @@ export default function NavBar() {
             <p className="font-bold text-inherit">BAOEA</p>
           </Link>
         </NavbarBrand>
-        <NavbarItem
+        {/* <NavbarItem
           className="ml-4"
           isActive={activeItem === "/projects"}
         >
@@ -64,7 +64,7 @@ export default function NavBar() {
           <Link color={activeItem === "/bestwehotel" ? undefined :"foreground"} href="/bestwehotel">
             Bestwehotel
           </Link>
-        </NavbarItem>
+        </NavbarItem> */}
         <NavbarItem isActive={activeItem === "/member"}>
           <Link color={activeItem === "/member" ? undefined :"foreground"} href="/member">
             Member
@@ -77,11 +77,11 @@ export default function NavBar() {
         </NavbarItem> */}
       </NavbarContent>
 
-      <NavbarContent justify="end">
+      {/* <NavbarContent justify="end">
         <SessionProvider>
           <LoginModule />
         </SessionProvider>
-      </NavbarContent>
+      </NavbarContent> */}
 
       <NavbarMenu>
         {menuItems.map((item, index) => (

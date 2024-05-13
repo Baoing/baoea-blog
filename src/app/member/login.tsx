@@ -1,9 +1,8 @@
 "use client"
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, Input, useDisclosure, Snippet} from "@nextui-org/react";
 import {sendLogin} from "@/utils/api";
 import { Toaster, toast } from 'sonner';
-import MembersStore from "@/stores/MembersStore";
 import stores from "@/stores";
 
 function validatePhoneNumber(phoneNumber:string) {
@@ -22,7 +21,7 @@ const Login = () => {
   const [captcha, setCaptcha] = useState("https://imgs.bestwehotel.com/socialmember-webservice-sms/vcode/18779580591")
   const [phoneInvalid, setPhoneInvalid] = useState(false)
 
-  const [token, setToken] = useState("6YG6z4rIBQ80EQblIfyHdY1L7lJ2YCcSviGFuZ+dATFgHUjBIMWnQVh42h4nFVsn")
+  const [token, setToken] = useState("")
 
   const { MembersStore } = stores
 
@@ -58,11 +57,6 @@ const Login = () => {
       });
   }
 
-  useEffect(()=>{
-    MembersStore.addMember(token)
-  },[])
-
-
   const handleLogin = () => {
     setLoading(true)
     sendLogin({
@@ -71,7 +65,8 @@ const Login = () => {
     }).then(({code, data, msg})=>{
       if(code==200){
         setToken(data)
-        toast.success("获取成功")
+        // toast.success("获取成功")
+        MembersStore.addMember(data)
       } else{
         toast.error(msg)
       }
@@ -105,7 +100,7 @@ const Login = () => {
       onChange={(e)=> {
         setPhoneCode(e.target.value)
       }}
-      type="number"
+      type="text"
       label="手机验证码"
       className="max-w-sm"
     />
@@ -141,7 +136,7 @@ const Login = () => {
       </ModalContent>
     </Modal>
 
-    <Button className={"w-[384px] max-w-full"} onClick={handleLogin} isLoading={loading}>获取Token</Button>
+    <Button className={"w-[384px] max-w-full"} onClick={handleLogin} isLoading={loading}>登录</Button>
     {
       token && <div className={"w-[384px] max-w-full"}>
         <Snippet className={"w-full"} size={"md"} color="success">
