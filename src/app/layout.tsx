@@ -6,6 +6,8 @@ import { Provider } from './provider'
 import Layout from "@/layout";
 const inter = Inter({ subsets: ["latin"] });
 import type { Viewport } from 'next'
+import {Toaster} from "sonner";
+import ClientInit from "@/app/ClientInit";
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -31,6 +33,10 @@ export default function RootLayout({
           <Layout>
             <ThemeSwitcher />
             {children}
+
+            <Toaster theme={"dark"} richColors  />
+
+            <ClientInit />
           </Layout>
         </Provider>
       </body>

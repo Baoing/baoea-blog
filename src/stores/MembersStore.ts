@@ -2,6 +2,7 @@ import {action, makeAutoObservable, observable} from "mobx"
 import {getCoupon, getCoupon100, getCoupon300, getInfoByToken} from "@/utils/api";
 import {toast} from "sonner";
 import {isBrowser} from "@/utils/utils";
+import {b} from "@nextui-org/slider/dist/use-slider-64459b54";
 
 export type Member = {
   token: string
@@ -31,9 +32,6 @@ export default class MembersStore implements MembersStoreProps {
 
   constructor() {
     // 使用这个才会在 MobX 6 上才会更新视图
-    const tokens = isBrowser() ? window.localStorage.getItem("bao-tokens") : ""
-    // 初始化
-    tokens && tokens.split(",").map(token=> this.addMember(token))
     makeAutoObservable(this)
   }
 
@@ -56,27 +54,27 @@ export default class MembersStore implements MembersStoreProps {
           const tokens = this.users.map(item=>item.token).toString()
           isBrowser() && window.localStorage.setItem("bao-tokens", tokens)
 
-          getCoupon(token).then((res)=>{
-            if(res.code===200){
-              toast.success('100积分领取成功或者超出：'+ res.data.msg)
-            }else{
-              toast.error('100积分领券失败,' + res.msg)
-            }
-          })
-          getCoupon300(token).then((res)=>{
-            if(res.code===200){
-              toast.success('领取300无门槛：'+ res.data.msg)
-            }else{
-              toast.error('领取300无门槛失败,' + res.msg)
-            }
-          })
-          getCoupon100(token).then((res) => {
-            if(res.code===200){
-              toast.success('领取100无门槛：'+ res.data.msg)
-            }else{
-              toast.error('领取100无门槛失败,' + res.msg)
-            }
-          });
+          // getCoupon(token).then((res)=>{
+          //   if(res.code===200){
+          //     toast.success('100积分领取成功或者超出：'+ res.data.msg)
+          //   }else{
+          //     toast.error('100积分领券失败,' + res.msg)
+          //   }
+          // })
+          // getCoupon300(token).then((res)=>{
+          //   if(res.code===200){
+          //     toast.success('领取300无门槛：'+ res.data.msg)
+          //   }else{
+          //     toast.error('领取300无门槛失败,' + res.msg)
+          //   }
+          // })
+          // getCoupon100(token).then((res) => {
+          //   if(res.code===200){
+          //     toast.success('领取100无门槛：'+ res.data.msg)
+          //   }else{
+          //     toast.error('领取100无门槛失败,' + res.msg)
+          //   }
+          // });
         }else{
           toast.error(msg + ", Token错误或者已过期")
         }
@@ -90,5 +88,25 @@ export default class MembersStore implements MembersStoreProps {
     if(target){
       this.coupons.push({...couponsInfo, token, mobile:target.data.mobile})
     }
+  }
+
+  @action.bound
+  exportTokens() {
+    return this.users.map(user=> user.token).toString()
+  }
+
+  @action.bound
+  /**
+   * 导入账户
+   * @param tokens tokens
+   * @param isCover 是否覆盖
+   */
+  importTokens(tokens: string, isCover?:boolean) {
+    if(isCover){
+      this.users = []
+    }
+    tokens.split(",").forEach(token=>{
+      this.addMember(token)
+    })
   }
 }

@@ -1,10 +1,10 @@
 "use client"
 import { usePathname } from 'next/navigation'
+
 import React, {useEffect, useState} from "react";
 import {Logo} from "./Logo";
-import {SessionProvider} from 'next-auth/react';
-import {Navbar, NavbarBrand, NavbarMenuToggle, NavbarMenuItem, NavbarMenu, NavbarContent, NavbarItem, Link, Button} from "@nextui-org/react";
-import LoginModule from "@/components/Header/LoginModule";
+import {Navbar, NavbarBrand, NavbarMenuToggle, NavbarMenuItem, NavbarMenu, NavbarContent, NavbarItem} from "@nextui-org/react";
+import Link from "next/link";
 
 
 export default function NavBar() {
@@ -16,18 +16,9 @@ export default function NavBar() {
     setActiveItem(pathname)
   }, [pathname])
 
-
-  const menuItems = [
-    "Projects",
-    "Articles",
-    "Collections",
-    "About",
-    // "Contact",
-    "Log out",
-  ];
-
   return (
     <Navbar
+      maxWidth={1240}
       isBordered
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}
@@ -36,7 +27,7 @@ export default function NavBar() {
         <NavbarMenuToggle aria-label={isMenuOpen ? "Close menu" : "Open menu"} />
       </NavbarContent>
 
-      <NavbarContent className="sm:hidden pr-3" justify="center">
+      <NavbarContent className="sm:hidden pr-8" justify="center">
         <NavbarBrand>
           <Link color="foreground" href="/">
             <Logo />
@@ -45,7 +36,7 @@ export default function NavBar() {
         </NavbarBrand>
       </NavbarContent>
 
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
+      <NavbarContent className="hidden sm:flex gap-6" justify="center">
         <NavbarBrand>
           <Link color="foreground" href="/">
             <Logo />
@@ -67,12 +58,17 @@ export default function NavBar() {
         </NavbarItem> */}
         <NavbarItem isActive={activeItem === "/member"}>
           <Link color={activeItem === "/member" ? undefined :"foreground"} href="/member">
-            Member
+            会员购
           </Link>
         </NavbarItem>
         <NavbarItem isActive={activeItem === "/lisheng"}>
           <Link color={activeItem === "/lisheng" ? undefined :"foreground"} href="/lisheng">
-            LiSheng
+            丽苼活动
+          </Link>
+        </NavbarItem>
+        <NavbarItem isActive={activeItem === "/accounts"}>
+          <Link color={activeItem === "/accounts" ? undefined :"foreground"} href="/accounts">
+            账户管理
           </Link>
         </NavbarItem>
       </NavbarContent>
@@ -84,17 +80,18 @@ export default function NavBar() {
       </NavbarContent> */}
 
       <NavbarMenu>
-        {menuItems.map((item, index) => (
+        {[
+          {title: "会员购", path: "/member"},
+          {title: "丽苼活动", path: "/lisheng"},
+          {title: "账户管理", path: "/accounts"},
+        ].map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
             <Link
               className="w-full"
-              color={
-                index === 2 ? "warning" : index === menuItems.length - 1 ? "danger" : "foreground"
-              }
-              href="#"
+              href={item.path}
               size="lg"
             >
-              {item}
+              {item.title}
             </Link>
           </NavbarMenuItem>
         ))}

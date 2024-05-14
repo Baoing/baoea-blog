@@ -36,7 +36,7 @@ import {Time} from "@internationalized/date";
 import {ClockCircleLinearIcon} from "@/app/components/Icons";
 import {Input} from "@nextui-org/input";
 import {useState} from "react";
-import {purchaseAtTime} from "@/utils/utils";
+import {copyToClipboard, purchaseAtTime} from "@/utils/utils";
 
 
 export default function Member() {
@@ -85,14 +85,7 @@ export default function Member() {
     })
   }
 
-  /**
-   * 复制内容
-   * @param content
-   */
-  const copyToClipboard = (content: string) => {
-    copy(content)
-    toast.success("复制成功")
-  }
+
 
   const {MembersStore} = stores
 
@@ -148,26 +141,6 @@ export default function Member() {
     }
 
     return <div className="p-5">
-      <Tabs aria-label="Options">
-        <Tab key="password" title="账户密码登录">
-          <Card>
-            <CardBody>
-              <Login/>
-            </CardBody>
-          </Card>
-        </Tab>
-
-        <Tab key="token" title="Token登录">
-          <Card>
-            <CardBody>
-              <TokenLogin/>
-            </CardBody>
-          </Card>
-        </Tab>
-      </Tabs>
-
-      <Divider className="mb-4"/>
-
       {
         MembersStore.users.length <= 0
           ? <div className="p-4">暂未登录账户</div>

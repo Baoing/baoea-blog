@@ -105,7 +105,6 @@ const Login = () => {
       className="max-w-sm"
     />
 
-
     <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
       <ModalContent>
         {(onClose) => (
@@ -146,7 +145,6 @@ const Login = () => {
       </div>
     }
 
-    <Toaster richColors  />
   </div>
 }
 

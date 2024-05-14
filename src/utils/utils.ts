@@ -1,5 +1,17 @@
+import copy from "copy-to-clipboard";
+import {toast} from "sonner";
+
 export const isBrowser = () => {
     return typeof window !== 'undefined'
+}
+
+/**
+ * 复制内容
+ * @param content
+ */
+export const copyToClipboard = (content: string) => {
+    copy(content)
+    toast.success("复制成功")
 }
 
 /**

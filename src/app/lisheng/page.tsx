@@ -70,8 +70,6 @@ const Lisheng = () => {
         />
 
         <Button onClick={handleLingqu}>领取礼包</Button>
-
-        <Toaster richColors  />
     </div>
 }
 

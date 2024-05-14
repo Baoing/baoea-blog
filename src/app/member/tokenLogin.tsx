@@ -33,8 +33,6 @@ const TokenLogin = () => {
     </div>
 
     <Button className={"w-[384px] max-w-full"} onClick={handleLogin} isLoading={loading}>登录</Button>
-
-    <Toaster richColors  />
   </div>
 }
 
