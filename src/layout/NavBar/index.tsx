@@ -14,6 +14,7 @@ export default function NavBar() {
   const [activeItem, setActiveItem] = useState("")
   useEffect(()=> {
     setActiveItem(pathname)
+    setIsMenuOpen(false)
   }, [pathname])
 
   return (
@@ -27,10 +28,9 @@ export default function NavBar() {
         <NavbarMenuToggle aria-label={isMenuOpen ? "Close menu" : "Open menu"} />
       </NavbarContent>
 
-      <NavbarContent className="sm:hidden pr-8" justify="center">
+      <NavbarContent className="sm:hidden pr-2" justify="center">
         <NavbarBrand>
           <Link color="foreground" href="/">
-            <Logo />
             <p className="font-bold text-inherit">BAOEA</p>
           </Link>
         </NavbarBrand>

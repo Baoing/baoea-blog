@@ -11,21 +11,23 @@ import {
   TableColumn,
   TableHeader,
   TableRow,
-  Tabs, TimeInput, useDisclosure
+  Tabs,
+  TimeInput,
+  useDisclosure
 } from "@nextui-org/react";
-import Login from "@/app/member/login";
-import TokenLogin from "@/app/member/tokenLogin";
 import {addBooking, getMallCouponList, getOrderDetailById} from "@/utils/api"
-import copy from 'copy-to-clipboard'
 
 import {Observer} from "mobx-react"
 import stores from "@/stores";
 import {
   get0Mango,
-  get100Points, get149Mango,
+  get100Points,
+  get149Mango,
   get19Himalaya,
   get1Himalaya,
-  get1Mango, get399Mango, get49Mango,
+  get1Mango,
+  get399Mango,
+  get49Mango,
   getDSNCoupon,
   getParkingCoupon
 } from "./metadata"
@@ -41,9 +43,9 @@ import {copyToClipboard, purchaseAtTime} from "@/utils/utils";
 
 export default function Member() {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
-  const [maxCount,setMaxCount] = useState(10)
+  const [maxCount, setMaxCount] = useState(10)
   const [time, setTime] = useState(new Time(11, 0))
-  const [couponIds, setCouponIds] = useState({couponid0:"",couponid1:"",couponid2:"",couponid5:""})
+  const [couponIds, setCouponIds] = useState({couponid0: "", couponid1: "", couponid2: "", couponid5: ""})
 
   /**
    * 下单
@@ -58,7 +60,7 @@ export default function Member() {
       if (code === 200 && data) {
         toast.success('购买成功!')
         getOrderDetailCode(token, data.orderNo)
-      }else{
+      } else {
         toast.error(msg)
       }
     })
@@ -72,10 +74,10 @@ export default function Member() {
   const getOrderDetailCode = (token, orderId) => {
     getOrderDetailById(token, orderId).then(res => {
       try {
-        if(res.code === 200){
+        if (res.code === 200) {
           const {couponName, couponId} = res.data.subOrderDetails[0].productInfo[0].virtualInfos[0]
 
-          if(couponId){
+          if (couponId) {
             MembersStore.addCoupons(token, {name: couponName, code: couponId})
           }
         }
@@ -86,44 +88,43 @@ export default function Member() {
   }
 
 
-
   const {MembersStore} = stores
 
-  const getCouponList = (token:string) => {
-    getMallCouponList(token).then(res=>{
-      if(res.code === 200){
-      const {mallCoupons} = res.data
+  const getCouponList = (token: string) => {
+    getMallCouponList(token).then(res => {
+      if (res.code === 200) {
+        const {mallCoupons} = res.data
 
-        const couponids = {couponid0:"",couponid1:"",couponid2:"",couponid5:""}
+        const couponids = {couponid0: "", couponid1: "", couponid2: "", couponid5: ""}
 
-      mallCoupons.forEach(coupon => {
-        switch (coupon.configId) {
-          case 31100:
-            couponids.couponid0 = coupon.couponId;
-            break;
-          case 31277:
-            couponids.couponid1 = coupon.couponId;
-            break;
-          case 31280:  //这是100积分卷获取id存储id
-            couponids.couponid2 = coupon.couponId;
-            break;
-          case 30942:
-            couponids.couponid5 = coupon.couponId;
-            break;
-          default:
-            break;
+        mallCoupons.forEach(coupon => {
+          switch (coupon.configId) {
+            case 31100:
+              couponids.couponid0 = coupon.couponId;
+              break;
+            case 31277:
+              couponids.couponid1 = coupon.couponId;
+              break;
+            case 31280:  //这是100积分卷获取id存储id
+              couponids.couponid2 = coupon.couponId;
+              break;
+            case 30942:
+              couponids.couponid5 = coupon.couponId;
+              break;
+            default:
+              break;
+          }
+        });
+
+
+        // 检查是否有有效的 couponId 存储，如果没有则输出错误信息
+        if (couponids.couponid0 || couponids.couponid1 || couponids.couponid2 || couponids.couponid5) {
+          toast('成功收集到卷码');
+          console.log(couponids)
+          setCouponIds(couponids)
+        } else {
+          toast.error('未找到有效的卷码信息');
         }
-      });
-
-
-      // 检查是否有有效的 couponId 存储，如果没有则输出错误信息
-      if (couponids.couponid0 || couponids.couponid1 || couponids.couponid2 || couponids.couponid5) {
-        toast('成功收集到卷码');
-        console.log(couponids)
-        setCouponIds(couponids)
-      } else {
-        toast.error('未找到有效的卷码信息');
-      }
       }
     })
   }
@@ -132,9 +133,9 @@ export default function Member() {
     // 定时抢购
     const handleFlashSale = () => {
       const body = getParkingCoupon()
-      purchaseAtTime(time.toString(), maxCount, ()=>{
+      purchaseAtTime(time.toString(), maxCount, () => {
         toast("开始抢购！")
-        MembersStore.users.map(user=> {
+        MembersStore.users.map(user => {
           handleAddbooking(user.token, body)
         })
       })
@@ -238,7 +239,7 @@ export default function Member() {
         </CardBody>
       </Card>
 
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+      <Modal placement={"top-center"} isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
           {(onClose) => (
             <>
@@ -249,12 +250,12 @@ export default function Member() {
                     label="抢购时间"
                     labelPlacement="outside"
                     value={time}
-                    onChange={(e)=>{
+                    onChange={(e) => {
                       setTime(e)
                     }}
                     defaultValue={new Time(11, 0)}
                     startContent={(
-                      <ClockCircleLinearIcon className="text-xl text-default-400 pointer-events-none flex-shrink-0" />
+                      <ClockCircleLinearIcon className="text-xl text-default-400 pointer-events-none flex-shrink-0"/>
                     )}
                   />
                 </p>
@@ -263,7 +264,7 @@ export default function Member() {
                     label="每个号最大抢购次数"
                     type={"number"}
                     value={maxCount}
-                    onChange={(e)=>{
+                    onChange={(e) => {
                       setMaxCount(Number(e.target.value))
                     }}
                   />

@@ -12,7 +12,7 @@ export default function AddAccount() {
         添加账户
       </Button>
 
-      <Modal placement={"center"} isOpen={isOpen} onOpenChange={onOpenChange}>
+      <Modal placement={"top-center"} isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
           {(onClose) => (
             <>

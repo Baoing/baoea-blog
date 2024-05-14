@@ -105,7 +105,7 @@ const Login = () => {
       className="max-w-sm"
     />
 
-    <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+    <Modal placement={"top-center"} isOpen={isOpen} onOpenChange={onOpenChange}>
       <ModalContent>
         {(onClose) => (
           <>

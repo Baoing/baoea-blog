@@ -10,6 +10,9 @@ export const isBrowser = () => {
  * @param content
  */
 export const copyToClipboard = (content: string) => {
+    if(!content) {
+        return toast.success("内容为空")
+    }
     copy(content)
     toast.success("复制成功")
 }
