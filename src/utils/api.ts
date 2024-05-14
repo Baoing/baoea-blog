@@ -1,7 +1,19 @@
 import {post} from './httpService';
+import {clientInfo} from "@/app/member/metadata";
+
+const getHeaders = (token: string) => {
+  return {
+    'Token': token,
+    'Authtype': '5',
+    'Blackbox': '',
+    'Content-Type': 'application/json;charset=UTF-8',
+    'Unitype': '10000011',
+    'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1'
+  }
+}
 
 // login
-export async function sendLogin(params:{
+export async function sendLogin(params: {
   "mobile": string,
   "validateCode": string
 }) {
@@ -20,15 +32,7 @@ export async function getInfoByToken(token: string) {
   try {
     return await post<any>('/api/proxy', {
       url: "https://malls.bestwehotel.com/plateno_mall/member/myPage",
-    },{
-      'Authtype': '5',
-        'Blackbox': 'kWPH91711592677c6Z8zt4hpP4',
-        // 'Content-Length': data.length,
-        'Content-Type': 'application/json;charset=UTF-8',
-        'Token': token,
-        'Unitype': '10000011',
-        'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1'
-    })
+    }, getHeaders(token))
     // 在这里对返回的数据进行处理
   } catch (error) {
     console.error('POST请求失败:', error);
@@ -36,12 +40,12 @@ export async function getInfoByToken(token: string) {
 }
 
 
-export async function addBooking({headers, body}: any) {
+export async function addBooking({token, body}: any) {
   try {
     return await post<any>('/api/proxy', {
       url: "https://malls.bestwehotel.com/plateno_mall/booking/addBooking",
       ...body,
-    }, headers)
+    }, getHeaders(token))
     // 在这里对返回的数据进行处理
   } catch (error) {
     console.error('POST请求失败:', error);
@@ -49,28 +53,25 @@ export async function addBooking({headers, body}: any) {
 }
 
 /**
- * 获取100积分
+ * couponActivityId
+ * 45832 获取100积分
+ * 45828 获取300无门槛
+ * 45828 获取300无门槛
  * @param token
  */
 export async function getCoupon(token: string) {
   let url = `https://malls.bestwehotel.com/plateno_mall/common/proxy/module-couponPick`
 
-  const requestBody ={"clientInfo":{"lbs":",","phoneType":"","appVersion":"","deviceId":"","sysCode":"","browserType":"Netscape","sysType":"MacIntel","channelId":"","platformId":"","sid":574582,"activityId":"","channel":2001},"couponActivityId":45832}
+  const requestBody = {
+    "clientInfo": clientInfo,
+    "couponActivityId": 45832
+  }
 
   try {
     return await post<any>('/api/proxy', {
       url,
       ...requestBody
-    }, {
-      'uniType': '10000011',
-          'authType': '5',
-          // 'Host': 'malls.bestwehotel.com',
-          'Accept': 'application/json, text/plain, */*',
-          'Content-Type': 'application/json;charset=utf-8',
-          'Accept-Language': 'zh-CN,zh-Hans;q=0.9',
-          'blackBox': 'undefined',
-          token,
-    },)
+    }, getHeaders(token))
     // 在这里对返回的数据进行处理
   } catch (error) {
     console.error('POST请求失败:', error);
@@ -83,21 +84,16 @@ export async function getCoupon(token: string) {
  */
 export async function getCoupon300(token: string) {
   let url = `https://malls.bestwehotel.com/plateno_mall/common/proxy/module-couponPick`
-  const requestBody ={"clientInfo":{"lbs":",","phoneType":"","appVersion":"","deviceId":"","sysCode":"","browserType":"Netscape","sysType":"MacIntel","channelId":"","platformId":"","sid":574582,"activityId":"","channel":2001},"couponActivityId":45828}
+  const requestBody = {
+    "clientInfo": clientInfo,
+    "couponActivityId": 45828
+  }
 
   try {
     return await post<any>('/api/proxy', {
       url,
       ...requestBody
-    }, {
-      'uniType': '10000011',
-          'authType': '5',
-          'Accept': 'application/json, text/plain, */*',
-          'Content-Type': 'application/json;charset=utf-8',
-          'Accept-Language': 'zh-CN,zh-Hans;q=0.9',
-          'blackBox': 'undefined',
-          token,
-    },)
+    }, getHeaders(token))
     // 在这里对返回的数据进行处理
   } catch (error) {
     console.error('POST请求失败:', error);
@@ -111,20 +107,8 @@ export async function getCoupon300(token: string) {
  */
 export async function getCoupon100(token: string) {
   let url = `https://malls.bestwehotel.com/plateno_mall/common/proxy/module-couponPick`
-  const requestBody ={
-    "clientInfo": {
-      "lbs": ",",
-      "phoneType": "iPad13,18",
-      "appVersion": "5.8.5",
-      "sysCode": "16.5.1",
-      "browserType": "Netscape",
-      "sysType": "iPad",
-      "channelId": "309488",
-      "platformId": "",
-      "sid": 365348,
-      "activityId": "",
-      "channel": 3001
-    },
+  const requestBody = {
+    "clientInfo": clientInfo,
     "actId": 95,
     "channel": 3001,
     "couponId": 31100
@@ -134,15 +118,54 @@ export async function getCoupon100(token: string) {
     return await post<any>('/api/proxy', {
       url,
       ...requestBody
-    }, {
-      'uniType': '10000011',
-          'authType': '5',
-          'Accept': 'application/json, text/plain, */*',
-          'Content-Type': 'application/json;charset=utf-8',
-          'Accept-Language': 'zh-CN,zh-Hans;q=0.9',
-          'blackBox': 'undefined',
-          token,
-    },)
+    }, getHeaders(token))
+    // 在这里对返回的数据进行处理
+  } catch (error) {
+    console.error('POST请求失败:', error);
+  }
+}
+
+/**
+ * 获取订单详情
+ * @param token
+ * @param orderId
+ */
+export async function getOrderDetailById(token:string, orderId: string) {
+  let url = `https://malls.bestwehotel.com/plateno_mall/common/proxy/booking-getOrderDetail`
+  const requestBody = {
+    "clientInfo": clientInfo,
+    orderNo: orderId
+  }
+
+  try {
+    return await post<any>('/api/proxy', {
+      url,
+      ...requestBody
+    }, getHeaders(token))
+    // 在这里对返回的数据进行处理
+  } catch (error) {
+    console.error('POST请求失败:', error);
+  }
+}
+/**
+ * 获取所有券码id
+ * @param token
+ * @param orderId
+ */
+export async function getMallCouponList(token:string) {
+  let url = `https://malls.bestwehotel.com/plateno_mall/coupon/mallCouponList`
+  const requestBody = {
+    "clientInfo": clientInfo,
+    "pageNum": 1,
+    "pageSize": 100,
+    "status": [1, 2]
+  }
+
+  try {
+    return await post<any>('/api/proxy', {
+      url,
+      ...requestBody
+    }, getHeaders(token))
     // 在这里对返回的数据进行处理
   } catch (error) {
     console.error('POST请求失败:', error);
@@ -151,12 +174,16 @@ export async function getCoupon100(token: string) {
 
 
 
+// -===============================================================-
 
-
-
+/**
+ * 丽苼活动
+ * @param mobile
+ * @param picVerifyCode
+ */
 export async function getLishengImgCode(mobile: string, picVerifyCode?: string) {
-  let url = "https://mkt.bestwehotel.com/proxy/mkt-toolkit/gift-act/member/sms-validate-code?mobile="+mobile
-  if(picVerifyCode) {
+  let url = "https://mkt.bestwehotel.com/proxy/mkt-toolkit/gift-act/member/sms-validate-code?mobile=" + mobile
+  if (picVerifyCode) {
     url += `&picVerifyCode=${picVerifyCode}`
   }
   try {
@@ -170,9 +197,8 @@ export async function getLishengImgCode(mobile: string, picVerifyCode?: string) 
 }
 
 
-
 export async function getLishengLingqu(mobile: string, code?: string) {
-  let url = `https://mkt.bestwehotel.com/proxy/mkt-toolkit/gift-act/member/login-and-get?actId=LBL00343&mobile=${mobile}&vcode=`+code
+  let url = `https://mkt.bestwehotel.com/proxy/mkt-toolkit/gift-act/member/login-and-get?actId=LBL00343&mobile=${mobile}&vcode=` + code
   try {
     return await post<any>('/api/proxy', {
       url

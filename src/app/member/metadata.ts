@@ -1,149 +1,514 @@
-export const headers = {
-    'uniType': '10000011',
-    'authType': '5',
-    'Accept': 'application/json, text/plain, */*',
-    'Content-Type': 'application/json;charset=utf-8',
-    'Accept-Language': 'zh-CN,zh-Hans;q=0.9',
-    'blackBox': 'undefined',
+export const clientInfo = {
+  "lbs": ",",
+  "phoneType": "",
+  "appVersion": "",
+  "deviceId": "",
+  "sysCode": "",
+  "browserType": "Netscape",
+  "sysType": "MacIntel",
+  "channelId": "",
+  "platformId": "",
+  "sid": 574582,
+  "activityId": "",
+  "channel": 2001
+}
+/**
+ * 获取抢购停车券的data
+ */
+export const getParkingCoupon = () => {
+  return {
+    "clientInfo": clientInfo,
+    "chainID": null,
+    "packetReduceMoney": null,
+    "activityReduceAmount": 0,
+    "point": 9,
+    "totalAmount": 0,
+    "consigneeName": "",
+    "consigneeMobile": "",
+    "consigneeAddress": "",
+    "chanelId": 101,
+    "shippingType": 1,
+    "resource": 2001,
+    "couponId": "",
+    "province": "",
+    "city": "",
+    "area": "",
+    "offline": 0,
+    "goodsList": [
+      {
+        "goodsId": 179101,
+        "quantity": 1,
+        "priceType": 3,
+        "gift": 0,
+        "present": 0,
+        "priceStrategy": 20088,
+        "entrance": null,
+        "pureIntegralId": null,
+        "pointActivityId": null,
+        "usePointNums": "9",
+        "activityId": "20088",
+        "activityType": "1"
+      }
+    ],
+    "orderResource": "1",
+    "deductPoint": 9,
+    "isVirtual": 1,
+    "rechargeAccount": "",
+    "postageCouponId": "",
+    "discountType": 0,
+    "flowType": 0,
+    "postageCouponNum": 0,
+    "orderRemark": "",
+    "orderRequiredValue": "[]"
+  }
 }
 
 /**
- * 获取抢购停车券的header和data
+ * 获取迪士尼券的data
  */
-export const getParkingCoupon = (token: string) => {
-    const postData = JSON.stringify({
-        "clientInfo": {
-        "lbs": ",",
-        "phoneType": "",
-        "appVersion": "",
-        "deviceId": "",
-        "sysCode": "",
-        "browserType": "Netscape",
-        "sysType": "Win32",
-        "channelId": "",
-        "platformId": "",
-        "sid": 574582,
-        "activityId": "",
-        "channel": 2001
-        },
-        "chainID": null,
-        "packetReduceMoney": null,
-        "activityReduceAmount": 0,
-        "point": 9,
-        "totalAmount": 0,
-        "consigneeName": "",
-        "consigneeMobile": "",
-        "consigneeAddress": "",
-        "chanelId": 101,
-        "shippingType": 1,
-        "resource": 2001,
-        "couponId": "",
-        "province": "",
-        "city": "",
-        "area": "",
-        "offline": 0,
-        "goodsList": [
-        {
-            "goodsId": 179101,
-            "quantity": 1,
-            "priceType": 3,
-            "gift": 0,
-            "present": 0,
-            "priceStrategy": 20088,
-            "entrance": null,
-            "pureIntegralId": null,
-            "pointActivityId": null,
-            "usePointNums": "9",
-            "activityId": "20088",
-            "activityType": "1"
-        }
-        ],
-        "orderResource": "1",
-        "deductPoint": 9,
-        "isVirtual": 1,
-        "rechargeAccount": "",
-        "postageCouponId": "",
-        "discountType": 0,
-        "flowType": 0,
-        "postageCouponNum": 0,
-        "orderRemark": "",
-        "orderRequiredValue": "[]"
-    })
-    
-    return {
-        headers: {
-            'Content-Type': 'application/json;charset=utf-8',
-            'Content-Length': postData.length,
-            "authType": "5",
-            "token": token,
-            "uniType": "10000011",
-
-            'Accept': 'application/json, text/plain, */*',
-            
-            'Accept-Language': 'zh-CN,zh-Hans;q=0.9',
-            'blackBox': 'undefined',
-            // 'Cookie': 'gdp_user_id=768e81e8-7465-4940-afbb-99b7505764df; 989d198a589474f0_gdp_session_id=a8d4b7c9-9c75-4237-ab45-4892a6a6f250; HWWAFSESID=fff9e73bcf772ed38e; HWWAFSESTIME=1714701550570; token=rTZ0FBp+Pb0ihvRN3DH9EoyYFjVk3CNyaQGo753SV+AYx7gaIsMWwtW1tjfYrfJb; Hm_lvt_9f2ae361d92de34235f5d20dda95b0bd=1714701553; Hm_lpvt_9f2ae361d92de34235f5d20dda95b0bd=1714701588; 9AD585D8A7CB034A=4Hgns1aG-1714701589688-ba6ffcdfcf8692015583756; 1735D64331DF397E=JOoY2ySsqFFxh61vv4Tsm%2FmRoh3SrEcwFychknVlFmP8wcyfphryzkuaxBMvD9N7SZ7X9Xi2uSlB27NJNqWvdw%3D%3D; _xid=l0K6kEi%2BJ5wxRC99GTN0H%2F1x%2BU1tHK3C3MjmZNLN0SE%3D; 989d198a589474f0_gdp_sequence_ids=%7B%22globalKey%22%3A12%2C%22PAGE%22%3A7%2C%22CUSTOM%22%3A6%7D; 989d198a589474f0_gdp_session_id_a8d4b7c9-9c75-4237-ab45-4892a6a6f250=true',
-        },
-        body: {
-            "clientInfo": {
-                "lbs": ",",
-                "phoneType": "",
-                "appVersion": "",
-                "deviceId": "",
-                "sysCode": "",
-                "browserType": "Netscape",
-                "sysType": "Win32",
-                "channelId": "",
-                "platformId": "",
-                "sid": 574582,
-                "activityId": "",
-                "channel": 2001
-            },
-            "chainID": null,
-            "packetReduceMoney": null,
-            "activityReduceAmount": 0,
-            "point": 9,
-            "totalAmount": 0,
-            "consigneeName": "",
-            "consigneeMobile": "",
-            "consigneeAddress": "",
-            "chanelId": 101,
-            "shippingType": 1,
-            "resource": 2001,
-            "couponId": "",
-            "province": "",
-            "city": "",
-            "area": "",
-            "offline": 0,
-            "goodsList": [
-            {
-                "goodsId": 179101,
-                "quantity": 1,
-                "priceType": 3,
-                "gift": 0,
-                "present": 0,
-                "priceStrategy": 20088,
-                "entrance": null,
-                "pureIntegralId": null,
-                "pointActivityId": null,
-                "usePointNums": "9",
-                "activityId": "20088",
-                "activityType": "1"
-            }
-            ],
-            "orderResource": "1",
-            "deductPoint": 9,
-            "isVirtual": 1,
-            "rechargeAccount": "",
-            "postageCouponId": "",
-            "discountType": 0,
-            "flowType": 0,
-            "postageCouponNum": 0,
-            "orderRemark": "",
-            "orderRequiredValue": "[]"
-        }
-    }
+export const getDSNCoupon = (phone: string) => {
+  return {
+    "clientInfo": clientInfo,
+    "chainID": null,
+    "packetReduceMoney": null,
+    "activityReduceAmount": 0,
+    "point": 23750,
+    "totalAmount": 0,
+    "consigneeName": "",
+    "consigneeMobile": "",
+    "consigneeAddress": "",
+    "chanelId": 101,
+    "shippingType": 1,
+    "resource": 2001,
+    "couponId": "",
+    "province": "",
+    "city": "",
+    "area": "",
+    "offline": 0,
+    "goodsList": [
+      {
+        "goodsId": 179008,
+        "quantity": 1,
+        "priceType": 3,
+        "gift": 0,
+        "present": 0,
+        "priceStrategy": 1,
+        "entrance": null,
+        "pureIntegralId": null,
+        "pointActivityId": "147",
+        "usePointNums": "23750",
+        "activityId": "147",
+        "activityType": "4001"
+      }
+    ],
+    "orderResource": "1",
+    "deductPoint": 23750,
+    "isVirtual": 1,
+    "rechargeAccount": "",
+    "postageCouponId": "",
+    "discountType": 0,
+    "flowType": 0,
+    "postageCouponNum": 0,
+    "orderRemark": "",
+    "orderRequiredValue": `[{"k":1,"v":"${phone}]`
+  }
 }
 
+/**
+ * 获取100积分礼包
+ */
+export const get100Points = (couponId: string) => {
 
-// export const 
+  return {
+    "clientInfo": clientInfo,
+    "chainID": null,
+    "packetReduceMoney": null,
+    "activityReduceAmount": 0,
+    "point": 0,
+    "totalAmount": 0,
+    "consigneeName": "",
+    "consigneeMobile": "",
+    "consigneeAddress": "",
+    "chanelId": 101,
+    "shippingType": 1,
+    "resource": 2001,
+    couponId,
+    "province": "",
+    "city": "",
+    "area": "",
+    "offline": 0,
+    "goodsList": [{
+      "goodsId": 179451,
+      "quantity": 1,
+      "priceType": 3,
+      "gift": 0,
+      "present": 0,
+      "priceStrategy": 1,
+      "entrance": null,
+      "pureIntegralId": null,
+      "pointActivityId": null,
+      "usePointNums": "1000"
+    }],
+    "orderResource": "1",
+    "deductPoint": 1000,
+    "isVirtual": 1,
+    "rechargeAccount": "",
+    "postageCouponId": "",
+    "discountType": 0,
+    "flowType": 0,
+    "postageCouponNum": 0,
+    "orderRemark": "",
+    "orderRequiredValue": "[]"
+  }
+}
+/**
+ * 获取19积分喜马拉雅
+ */
+export const get19Himalaya = () => {
+  return {
+    "clientInfo": clientInfo,
+    "chainID": null,
+    "packetReduceMoney": null,
+    "activityReduceAmount": 0,
+    "point": 19,
+    "totalAmount": 0,
+    "consigneeName": "",
+    "consigneeMobile": "",
+    "consigneeAddress": "",
+    "chanelId": 101,
+    "shippingType": 1,
+    "resource": 3001,
+    "couponId": "",
+    "province": "",
+    "city": "",
+    "area": "",
+    "offline": 0,
+    "goodsList": [{
+      "goodsId": 169219,
+      "quantity": 1,
+      "priceType": 3,
+      "gift": 0,
+      "present": 0,
+      "priceStrategy": 1,
+      "entrance": null,
+      "pureIntegralId": null,
+      "pointActivityId": "119",
+      "usePointNums": "19",
+      "activityId": "119",
+      "activityType": "4001"
+    }],
+    "orderResource": "1",
+    "deductPoint": 19,
+    "isVirtual": 1,
+    "rechargeAccount": "",
+    "postageCouponId": "",
+    "discountType": 0,
+    "flowType": 0,
+    "postageCouponNum": 0,
+    "orderRemark": "",
+    "verificationCode": "1",
+    "orderRequiredValue": "[]"
+  }
+}
+/**
+ * 获取1积分喜马拉雅
+ */
+export const get1Himalaya = () => {
+  return {
+    "clientInfo": clientInfo,
+    "chainID": null,
+    "packetReduceMoney": null,
+    "activityReduceAmount": 0,
+    "point": 1,
+    "totalAmount": 0,
+    "consigneeName": "",
+    "consigneeMobile": "",
+    "consigneeAddress": "",
+    "chanelId": 101,
+    "shippingType": 1,
+    "resource": 3001,
+    "couponId": "",
+    "province": "",
+    "city": "",
+    "area": "",
+    "offline": 0,
+    "goodsList": [{
+      "goodsId": 169219,
+      "quantity": 1,
+      "priceType": 3,
+      "gift": 0,
+      "present": 0,
+      "priceStrategy": 1,
+      "entrance": null,
+      "pureIntegralId": null,
+      "pointActivityId": "157",
+      "usePointNums": "1",
+      "activityId": "157",
+      "activityType": "4001"
+    }],
+    "orderResource": "1",
+    "deductPoint": 1,
+    "isVirtual": 1,
+    "rechargeAccount": "",
+    "postageCouponId": "",
+    "discountType": 0,
+    "flowType": 0,
+    "postageCouponNum": 0,
+    "orderRemark": "",
+    "verificationCode": "1",
+    "orderRequiredValue": "[]"
+  }
+}
+
+/**
+ * 获取1积分芒果
+ */
+export const get1Mango = () => {
+  return {
+    "clientInfo": clientInfo,
+    "chainID": null,
+    "packetReduceMoney": null,
+    "activityReduceAmount": 0,
+    "point": 1,
+    "totalAmount": 0,
+    "consigneeName": "",
+    "consigneeMobile": "",
+    "consigneeAddress": "",
+    "chanelId": 101,
+    "shippingType": 1,
+    "resource": 2001,
+    "couponId": "",
+    "province": "",
+    "city": "",
+    "area": "",
+    "offline": 0,
+    "goodsList": [
+      {
+        "goodsId": 169218,
+        "quantity": 1,
+        "priceType": 3,
+        "gift": 0,
+        "present": 0,
+        "priceStrategy": 1,
+        "entrance": 13,
+        "pureIntegralId": null,
+        "pointActivityId": "157",
+        "usePointNums": "1",
+        "activityId": "157",
+        "activityType": "4001"
+      }
+    ],
+    "orderResource": "1",
+    "deductPoint": 1,
+    "isVirtual": 1,
+    "rechargeAccount": "",
+    "postageCouponId": "",
+    "discountType": 0,
+    "flowType": 0,
+    "postageCouponNum": 0,
+    "orderRemark": "",
+    "orderRequiredValue": "[]"
+  }
+}
+/**
+ * 获取0积分芒果
+ */
+export const get0Mango = (couponId:string) => {
+  return {
+    "clientInfo": clientInfo,
+    "chainID": null,
+    "packetReduceMoney": null,
+    "activityReduceAmount": 0,
+    "point": 0,
+    "totalAmount": 0,
+    "consigneeName": "",
+    "consigneeMobile": "",
+    "consigneeAddress": "",
+    "chanelId": 101,
+    "shippingType": 1,
+    "resource": 2001,
+    couponId,
+    "province": "",
+    "city": "",
+    "area": "",
+    "offline": 0,
+    "goodsList": [
+      {
+        "goodsId": 169218,
+        "quantity": 1,
+        "priceType": 3,
+        "gift": 0,
+        "present": 0,
+        "priceStrategy": 1,
+        "entrance": null,
+        "pureIntegralId": null,
+        "pointActivityId": "119",
+        "usePointNums": "249",
+        "activityId": "119",
+        "activityType": "4001"
+      }
+    ],
+    "orderResource": "1",
+    "deductPoint": 0,
+    "isVirtual": 1,
+    "rechargeAccount": "",
+    "postageCouponId": "",
+    "discountType": 0,
+    "flowType": 0,
+    "postageCouponNum": 0,
+    "orderRemark": "",
+    "orderRequiredValue": "[]"
+  }
+}
+
+/**
+ * 获取399积分芒果季卡
+ */
+export const get399Mango = (couponId:string) => {
+  return {
+    "clientInfo": clientInfo,
+    "chainID": null,
+    "packetReduceMoney": null,
+    "activityReduceAmount": 0,
+    "point": 399,
+    "totalAmount": 0,
+    "consigneeName": "",
+    "consigneeMobile": "",
+    "consigneeAddress": "",
+    "chanelId": 101,
+    "shippingType": 1,
+    "resource": 3001,
+    couponId,
+    "province": "",
+    "city": "",
+    "area": "",
+    "offline": 0,
+    "goodsList": [
+      {
+        "goodsId": 179778,
+        "quantity": 1,
+        "priceType": 3,
+        "gift": 0,
+        "present": 0,
+        "priceStrategy": 1,
+        "entrance": null,
+        "pureIntegralId": null,
+        "pointActivityId": "119",
+        "usePointNums": "699",
+        "activityId": "119",
+        "activityType": "4001"
+      }
+    ],
+    "orderResource": "1",
+    "deductPoint": 399,
+    "isVirtual": 1,
+    "rechargeAccount": "",
+    "postageCouponId": "",
+    "discountType": 0,
+    "flowType": 0,
+    "postageCouponNum": 0,
+    "orderRemark": "",
+    "verificationCode": " ",
+    "orderRequiredValue": "[]"
+  }
+}
+/**
+ * 获取49积分芒果月卡
+ */
+export const get49Mango = (couponId:string) => {
+  return {
+    "clientInfo": clientInfo,
+    "chainID": null,
+    "packetReduceMoney": null,
+    "activityReduceAmount": 0,
+    "point": 49,
+    "totalAmount": 0,
+    "consigneeName": "",
+    "consigneeMobile": "",
+    "consigneeAddress": "",
+    "chanelId": 101,
+    "shippingType": 1,
+    "resource": 2001,
+    couponId,
+    "province": "",
+    "city": "",
+    "area": "",
+    "offline": 0,
+    "goodsList": [
+      {
+        "goodsId": 169218,
+        "quantity": 1,
+        "priceType": 3,
+        "gift": 0,
+        "present": 0,
+        "priceStrategy": 1,
+        "entrance": null,
+        "pureIntegralId": null,
+        "pointActivityId": "119",
+        "usePointNums": "249",
+        "activityId": "119",
+        "activityType": "4001"
+      }
+    ],
+    "orderResource": "1",
+    "deductPoint": 49,
+    "isVirtual": 1,
+    "rechargeAccount": "",
+    "postageCouponId": "",
+    "discountType": 0,
+    "flowType": 0,
+    "postageCouponNum": 0,
+    "orderRemark": "",
+    "orderRequiredValue": "[]"
+  }
+}
+/**
+ * 获取149积分芒果月卡
+ */
+export const get149Mango = (couponId:string) => {
+  return {
+    "clientInfo": clientInfo,
+    "chainID": null,
+    "packetReduceMoney": null,
+    "activityReduceAmount": 0,
+    "point": 149,
+    "totalAmount": 0,
+    "consigneeName": "",
+    "consigneeMobile": "",
+    "consigneeAddress": "",
+    "chanelId": 101,
+    "shippingType": 1,
+    "resource": 2001,
+    couponId,
+    "province": "",
+    "city": "",
+    "area": "",
+    "offline": 0,
+    "goodsList": [
+      {
+        "goodsId": 169218,
+        "quantity": 1,
+        "priceType": 3,
+        "gift": 0,
+        "present": 0,
+        "priceStrategy": 1,
+        "entrance": null,
+        "pureIntegralId": null,
+        "pointActivityId": "119",
+        "usePointNums": "249",
+        "activityId": "119",
+        "activityType": "4001"
+      }
+    ],
+    "orderResource": "1",
+    "deductPoint": 149,
+    "isVirtual": 1,
+    "rechargeAccount": "",
+    "postageCouponId": "",
+    "discountType": 0,
+    "flowType": 0,
+    "postageCouponNum": 0,
+    "orderRemark": "",
+    "orderRequiredValue": "[]"
+  }
+}

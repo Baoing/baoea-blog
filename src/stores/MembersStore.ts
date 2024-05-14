@@ -1,7 +1,6 @@
 import {action, makeAutoObservable, observable} from "mobx"
 import {getCoupon, getCoupon100, getCoupon300, getInfoByToken} from "@/utils/api";
 import {toast} from "sonner";
-import { log } from "console";
 import {isBrowser} from "@/utils/utils";
 
 export type Member = {
@@ -13,14 +12,22 @@ export type Member = {
     memberMap: any
     mobile: string
     nickname: null | string
-  }
+  },
+}
+type couponType = {
+  name: string
+  code: string
+  mobile: string
+  token: string
 }
 export type MembersStoreProps = {
   users: Member[]
+  coupons: couponType[]
 }
 
 export default class MembersStore implements MembersStoreProps {
   @observable users:Member[] = []
+  @observable coupons:couponType[] = []
 
   constructor() {
     // 使用这个才会在 MobX 6 上才会更新视图
@@ -33,7 +40,6 @@ export default class MembersStore implements MembersStoreProps {
   @action.bound
   addMember(token:string) {
     if(!token) return
-    console.log("所添加Token",token)
     const noToken = this.users.findIndex(user=> user.token === token) === -1
 
     if(noToken){
@@ -71,11 +77,18 @@ export default class MembersStore implements MembersStoreProps {
               toast.error('领取100无门槛失败,' + res.msg)
             }
           });
-
         }else{
           toast.error(msg + ", Token错误或者已过期")
         }
       })
+    }
+  }
+
+  @action.bound
+  addCoupons(token:string, couponsInfo:{ name: string, code: string}) {
+    const target = this.users.find(item=>item.token === token)
+    if(target){
+      this.coupons.push({...couponsInfo, token, mobile:target.data.mobile})
     }
   }
 }
