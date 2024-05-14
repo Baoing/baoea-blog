@@ -109,4 +109,20 @@ export default class MembersStore implements MembersStoreProps {
       this.addMember(token)
     })
   }
+  @action.bound
+  /**
+   * 移除账户
+   * @param token token
+   */
+  removeUsers(token?: string) {
+    if(token === undefined){
+      this.users = []
+      isBrowser() && window.localStorage.removeItem("bao-tokens")
+    }
+    if(token){
+      this.users = this.users.filter(user=> user.token !== token)
+      const tokens = this.users.map(item=>item.token).toString()
+      isBrowser() && window.localStorage.setItem("bao-tokens", tokens)
+    }
+  }
 }

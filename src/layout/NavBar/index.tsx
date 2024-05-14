@@ -30,7 +30,7 @@ export default function NavBar() {
 
       <NavbarContent className="sm:hidden pr-2" justify="center">
         <NavbarBrand>
-          <Link color="foreground" href="/">
+          <Link color="foreground" className={"flex items-center"} href="/">
             <p className="font-bold text-inherit">BAOEA</p>
           </Link>
         </NavbarBrand>
@@ -38,7 +38,7 @@ export default function NavBar() {
 
       <NavbarContent className="hidden sm:flex gap-6" justify="center">
         <NavbarBrand>
-          <Link color="foreground" href="/">
+          <Link color="foreground" className={"flex items-center"} href="/">
             <Logo />
             <p className="font-bold text-inherit">BAOEA</p>
           </Link>

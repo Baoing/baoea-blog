@@ -29,7 +29,8 @@ import {
   get399Mango,
   get49Mango,
   getDSNCoupon,
-  getParkingCoupon
+  getParkingCoupon,
+  getGoldCard
 } from "./metadata"
 import {toast} from "sonner";
 import {Table} from "@nextui-org/table";
@@ -71,7 +72,7 @@ export default function Member() {
    * @param token
    * @param orderId
    */
-  const getOrderDetailCode = (token, orderId) => {
+  const getOrderDetailCode = (token:string, orderId:string) => {
     getOrderDetailById(token, orderId).then(res => {
       try {
         if (res.code === 200) {
@@ -212,6 +213,10 @@ export default function Member() {
                       <Button className="w-[160px]"
                               onClick={() => handleAddbooking(user.token, get149Mango(couponIds.couponid0))}>
                         149芒果月卡（需券码）
+                      </Button>
+                      <Button className="w-[160px]"
+                              onClick={() => handleAddbooking(user.token, getGoldCard())}>
+                        金卡购买（测试）
                       </Button>
 
                     </CardBody>

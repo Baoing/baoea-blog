@@ -21,7 +21,7 @@ export const getParkingCoupon = () => {
     "chainID": null,
     "packetReduceMoney": null,
     "activityReduceAmount": 0,
-    "point": 9,
+    "point": 9, // 这个不一样
     "totalAmount": 0,
     "consigneeName": "",
     "consigneeMobile": "",
@@ -36,22 +36,73 @@ export const getParkingCoupon = () => {
     "offline": 0,
     "goodsList": [
       {
-        "goodsId": 179101,
+        "goodsId": 179101, // 商品id不一样
         "quantity": 1,
         "priceType": 3,
         "gift": 0,
         "present": 0,
-        "priceStrategy": 20088,
+        "priceStrategy": 20088, // 价格策略
         "entrance": null,
         "pureIntegralId": null,
-        "pointActivityId": null,
-        "usePointNums": "9",
-        "activityId": "20088",
-        "activityType": "1"
+        "pointActivityId": null, // 活动id，有些是有活动的
+        "usePointNums": "9", // 所需积分
+        "activityId": "20088", // 互动id
+        "activityType": "1" // 活动类型
       }
     ],
     "orderResource": "1",
-    "deductPoint": 9,
+    "deductPoint": 9, // 所需积分
+    "isVirtual": 1,
+    "rechargeAccount": "",
+    "postageCouponId": "",
+    "discountType": 0,
+    "flowType": 0,
+    "postageCouponNum": 0,
+    "orderRemark": "",
+    "orderRequiredValue": "[]"
+  }
+}
+
+/**
+ * 获取金卡的data
+ */
+export const getGoldCard = () => {
+  return {
+    "clientInfo": clientInfo,
+    "chainID": null,
+    "packetReduceMoney": null,
+    "activityReduceAmount": 0,
+    "point": 0, // 这个不一样
+    "totalAmount": 9900,
+    "consigneeName": "",
+    "consigneeMobile": "",
+    "consigneeAddress": "",
+    "chanelId": 101,
+    "shippingType": 1,
+    "resource": 2001,
+    "couponId": "",
+    "province": "",
+    "city": "",
+    "area": "",
+    "offline": 0,
+    "goodsList": [
+      {
+        "goodsId": 78757, // 商品id不一样
+        "quantity": 1,
+        "priceType": 3,
+        "gift": 0,
+        "present": 0,
+        "priceStrategy": 20088, // 价格策略
+        "entrance": null,
+        "pureIntegralId": null,
+        "pointActivityId": null, // 活动id，有些是有活动的
+        "usePointNums": "9", // 所需积分
+        "activityId": "20088", // 互动id
+        "activityType": "1" // 活动类型
+      }
+    ],
+    "orderResource": "1",
+    "deductPoint": 9, // 所需积分
     "isVirtual": 1,
     "rechargeAccount": "",
     "postageCouponId": "",
@@ -319,7 +370,7 @@ export const get0Mango = (couponId:string) => {
     "chainID": null,
     "packetReduceMoney": null,
     "activityReduceAmount": 0,
-    "point": 0,
+    "point": 0, // 商品所需积分
     "totalAmount": 0,
     "consigneeName": "",
     "consigneeMobile": "",
