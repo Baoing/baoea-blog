@@ -21,10 +21,10 @@ export default function ImportModal() {
               <ModalHeader className="flex flex-col gap-1">导入账户</ModalHeader>
               <ModalBody>
                 <Textarea
+                  fullWidth={true}
                   value={tokens}
                   label="导入Token数据"
                   placeholder="批量导入使用,分割"
-                  className="max-w-xs"
                   onChange={(e)=>setTokens(e.target.value)}
                 />
               </ModalBody>
