@@ -24,10 +24,12 @@ const Page = () => {
           导出账户
         </Button>
 
+        <Button variant="shadow" onPress={()=> copyToClipboard(MembersStore.exportTokensAndPhones())}>
+          导出账户+手机号
+        </Button>
+
         <RemoveAllAccount />
       </div>
-
-
 
       <Table className={"mt-4"} align={"center"} aria-label="Example static collection table">
         <TableHeader>

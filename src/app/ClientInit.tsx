@@ -8,7 +8,7 @@ const ClientInit = () => {
   const {MembersStore} = stores
   useEffect(()=>{
     const tokens = isBrowser() ? window.localStorage.getItem("bao-tokens") : ""
-    tokens && tokens.split(",").map(token=> MembersStore.addMember(token))
+    tokens && tokens.split(",").map(token=> MembersStore.addMember(token, true))
   }, [])
   return <div />
 }

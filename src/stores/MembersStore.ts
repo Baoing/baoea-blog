@@ -2,6 +2,7 @@ import {action, makeAutoObservable, observable} from "mobx"
 import {getCoupon, getCoupon100, getCoupon300, getInfoByToken} from "@/utils/api";
 import {toast} from "sonner";
 import {isBrowser} from "@/utils/utils";
+import {b} from "@nextui-org/slider/dist/use-slider-64459b54";
 
 export type Member = {
   token: string
@@ -39,7 +40,7 @@ export default class MembersStore implements MembersStoreProps {
    * @param token
    */
   @action.bound
-  addMember(token:string) {
+  addMember(token:string, isInit?: boolean) {
     if(!token) return
     const noToken = this.users.findIndex(user=> user.token === token) === -1
 
@@ -54,8 +55,10 @@ export default class MembersStore implements MembersStoreProps {
             this.users = [...this.users, {token, data}]
           }
 
-          const tokens = this.users.map(item=>item.token).toString()
-          isBrowser() && window.localStorage.setItem("bao-tokens", tokens)
+          if (isBrowser() && !isInit){
+            const tokens = this.users.map(item=>item.token).toString()
+            window.localStorage.setItem("bao-tokens", tokens)
+          }
 
           // getCoupon(token).then((res)=>{
           //   if(res.code===200){
@@ -99,6 +102,22 @@ export default class MembersStore implements MembersStoreProps {
   @action.bound
   exportTokens() {
     return this.users.map(user=> user.token).toString()
+  }
+
+
+  /**
+   * 导出token和手机号
+   */
+  @action.bound
+  exportTokensAndPhones() {
+    if(this.users.length){
+      const data = this.users.map(user=> {
+        return {token: user.token, phone: user.data.mobile}
+      })
+      return JSON.stringify(data)
+    }else{
+      return ""
+    }
   }
 
   /**
