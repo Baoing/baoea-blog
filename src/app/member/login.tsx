@@ -77,7 +77,6 @@ const Login = () => {
         }}
         type="phone"
         label="手机号"
-        className="max-w-sm"
         errorMessage={phoneInvalid && "请输入正确的手机号"}
         isInvalid={phoneInvalid}
         endContent={
@@ -93,7 +92,6 @@ const Login = () => {
       }}
       type="text"
       label="手机验证码"
-      className="max-w-sm"
     />
 
     <Modal placement={"top-center"} isOpen={isOpen} onOpenChange={onOpenChange}>

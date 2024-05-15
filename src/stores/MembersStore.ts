@@ -47,7 +47,7 @@ export default class MembersStore implements MembersStoreProps {
       getInfoByToken(token).then(({data, code, msg})=>{
         if (code === 200){
           const targetIndex:number = this.users.findIndex(user=> user.data.mobile === data.mobile)
-
+          toast.success("登录成功")
           if(targetIndex !== -1) {
             this.users[targetIndex] = {token, data}
           }else{
