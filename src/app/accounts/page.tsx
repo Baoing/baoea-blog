@@ -1,7 +1,7 @@
 "use client"
 
 import PageContainer from "@/app/components/PageContainer";
-import {Button, TableBody, TableCell, TableColumn, TableHeader, TableRow, useDisclosure} from "@nextui-org/react";
+import {Button, TableBody, TableCell, TableColumn, TableHeader, TableRow} from "@nextui-org/react";
 import {Table} from "@nextui-org/table";
 import stores from "@/stores";
 import {Observer} from "mobx-react"
@@ -37,7 +37,6 @@ const Page = () => {
           <TableColumn>积分</TableColumn>
           <TableColumn>Token</TableColumn>
           <TableColumn>操作</TableColumn>
-
         </TableHeader>
         <TableBody emptyContent={"暂未登录账户"}>
           {

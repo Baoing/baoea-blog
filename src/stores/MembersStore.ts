@@ -2,7 +2,6 @@ import {action, makeAutoObservable, observable} from "mobx"
 import {getCoupon, getCoupon100, getCoupon300, getInfoByToken} from "@/utils/api";
 import {toast} from "sonner";
 import {isBrowser} from "@/utils/utils";
-import {b} from "@nextui-org/slider/dist/use-slider-64459b54";
 
 export type Member = {
   token: string
@@ -35,6 +34,10 @@ export default class MembersStore implements MembersStoreProps {
     makeAutoObservable(this)
   }
 
+  /**
+   * 添加会员
+   * @param token
+   */
   @action.bound
   addMember(token:string) {
     if(!token) return
@@ -44,7 +47,7 @@ export default class MembersStore implements MembersStoreProps {
       getInfoByToken(token).then(({data, code, msg})=>{
         if (code === 200){
           const targetIndex:number = this.users.findIndex(user=> user.data.mobile === data.mobile)
-          toast.success("登录成功")
+
           if(targetIndex !== -1) {
             this.users[targetIndex] = {token, data}
           }else{
@@ -76,7 +79,7 @@ export default class MembersStore implements MembersStoreProps {
           //   }
           // });
         }else{
-          toast.error(msg + ", Token错误或者已过期")
+          toast.error(msg + ", Token错误或者已过期。Token:" + token)
         }
       })
     }
@@ -90,17 +93,20 @@ export default class MembersStore implements MembersStoreProps {
     }
   }
 
+  /**
+   * 导出token
+   */
   @action.bound
   exportTokens() {
     return this.users.map(user=> user.token).toString()
   }
 
-  @action.bound
   /**
    * 导入账户
    * @param tokens tokens
    * @param isCover 是否覆盖
    */
+  @action.bound
   importTokens(tokens: string, isCover?:boolean) {
     if(isCover){
       this.users = []
@@ -109,11 +115,11 @@ export default class MembersStore implements MembersStoreProps {
       this.addMember(token)
     })
   }
-  @action.bound
   /**
    * 移除账户
    * @param token token
    */
+  @action.bound
   removeUsers(token?: string) {
     if(token === undefined){
       this.users = []

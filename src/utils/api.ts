@@ -1,6 +1,9 @@
 import {post} from './httpService';
 import {clientInfo} from "@/app/member/metadata";
 
+const MALL_URL = "https://malls.bestwehotel.com/plateno_mall"
+const SSO_URL = "https://ssologin.bestwehotel.com/plateno_mall"
+
 const getHeaders = (token: string) => {
   return {
     'Token': token,
@@ -20,7 +23,7 @@ export async function sendLogin(params: {
   try {
     return await post<any>('/api/proxy', {
       ...params,
-      url: "https://ssologin.bestwehotel.com/plateno_mall/unionLogin/login"
+      url: `${SSO_URL}/unionLogin/login`
     })
     // 在这里对返回的数据进行处理
   } catch (error) {
@@ -31,7 +34,7 @@ export async function sendLogin(params: {
 export async function getInfoByToken(token: string) {
   try {
     return await post<any>('/api/proxy', {
-      url: "https://malls.bestwehotel.com/plateno_mall/member/myPage",
+      url: `${MALL_URL}/member/myPage`,
     }, getHeaders(token))
     // 在这里对返回的数据进行处理
   } catch (error) {
@@ -43,7 +46,7 @@ export async function getInfoByToken(token: string) {
 export async function addBooking({token, body}: any) {
   try {
     return await post<any>('/api/proxy', {
-      url: "https://malls.bestwehotel.com/plateno_mall/booking/addBooking",
+      url: `${MALL_URL}/booking/addBooking`,
       ...body,
     }, getHeaders(token))
     // 在这里对返回的数据进行处理
@@ -60,7 +63,7 @@ export async function addBooking({token, body}: any) {
  * @param token
  */
 export async function getCoupon(token: string) {
-  let url = `https://malls.bestwehotel.com/plateno_mall/common/proxy/module-couponPick`
+  let url = `${MALL_URL}/common/proxy/module-couponPick`
 
   const requestBody = {
     "clientInfo": clientInfo,
@@ -83,7 +86,7 @@ export async function getCoupon(token: string) {
  * @param token
  */
 export async function getCoupon300(token: string) {
-  let url = `https://malls.bestwehotel.com/plateno_mall/common/proxy/module-couponPick`
+  let url = `${MALL_URL}/common/proxy/module-couponPick`
   const requestBody = {
     "clientInfo": clientInfo,
     "couponActivityId": 45828
@@ -106,7 +109,7 @@ export async function getCoupon300(token: string) {
  * @param token
  */
 export async function getCoupon100(token: string) {
-  let url = `https://malls.bestwehotel.com/plateno_mall/common/proxy/module-couponPick`
+  let url = `${MALL_URL}/common/proxy/module-couponPick`
   const requestBody = {
     "clientInfo": clientInfo,
     "actId": 95,
@@ -130,8 +133,8 @@ export async function getCoupon100(token: string) {
  * @param token
  * @param orderId
  */
-export async function getOrderDetailById(token:string, orderId: string) {
-  let url = `https://malls.bestwehotel.com/plateno_mall/common/proxy/booking-getOrderDetail`
+export async function getOrderDetailById(token: string, orderId: string) {
+  let url = `${MALL_URL}/common/proxy/booking-getOrderDetail`
   const requestBody = {
     "clientInfo": clientInfo,
     orderNo: orderId
@@ -147,13 +150,14 @@ export async function getOrderDetailById(token:string, orderId: string) {
     console.error('POST请求失败:', error);
   }
 }
+
 /**
  * 获取所有券码id
  * @param token
  * @param orderId
  */
-export async function getMallCouponList(token:string) {
-  let url = `https://malls.bestwehotel.com/plateno_mall/coupon/mallCouponList`
+export async function getMallCouponList(token: string) {
+  let url = `${MALL_URL}/coupon/mallCouponList`
   const requestBody = {
     "clientInfo": clientInfo,
     "pageNum": 1,
@@ -171,7 +175,6 @@ export async function getMallCouponList(token:string) {
     console.error('POST请求失败:', error);
   }
 }
-
 
 
 // -===============================================================-

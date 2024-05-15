@@ -4,12 +4,7 @@ import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, Input,
 import {sendLogin} from "@/utils/api";
 import { Toaster, toast } from 'sonner';
 import stores from "@/stores";
-
-function validatePhoneNumber(phoneNumber:string) {
-  // 使用正则表达式检查手机号码格式
-  const reg = /^1[3456789]\d{9}$/;
-  return reg.test(phoneNumber);
-}
+import {validatePhoneNumber} from "@/utils/utils";
 
 const Login = () => {
   const [loading, setLoading] = useState(false)
@@ -18,10 +13,8 @@ const Login = () => {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
   const [captchaValue, setCaptchaValue] = useState("")
-  const [captcha, setCaptcha] = useState("https://imgs.bestwehotel.com/socialmember-webservice-sms/vcode/18779580591")
+  const [captcha, setCaptcha] = useState("")
   const [phoneInvalid, setPhoneInvalid] = useState(false)
-
-  const [token, setToken] = useState("")
 
   const { MembersStore } = stores
 
@@ -64,8 +57,6 @@ const Login = () => {
       "validateCode": phoneCode
     }).then(({code, data, msg})=>{
       if(code==200){
-        setToken(data)
-        // toast.success("获取成功")
         MembersStore.addMember(data)
       } else{
         toast.error(msg)
@@ -135,16 +126,7 @@ const Login = () => {
       </ModalContent>
     </Modal>
 
-    <Button className={"w-[384px] max-w-full"} onClick={handleLogin} isLoading={loading}>登录</Button>
-    {
-      token && <div className={"w-[384px] max-w-full"}>
-        <Snippet className={"w-full"} size={"md"} color="success">
-          {token.slice(0, 32)}
-          {token.slice(33, 64)}
-        </Snippet>
-      </div>
-    }
-
+    <Button className={"w-full"} onClick={handleLogin} isLoading={loading}>登录</Button>
   </div>
 }
 

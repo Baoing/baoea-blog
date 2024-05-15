@@ -11,7 +11,7 @@ export const isBrowser = () => {
  */
 export const copyToClipboard = (content: string) => {
     if(!content) {
-        return toast.success("内容为空")
+        return toast.error("内容为空")
     }
     copy(content)
     toast.success("复制成功")
@@ -52,4 +52,10 @@ export function purchaseAtTime(purchaseTime:string, purchaseCount:number, purcha
             purchaseFunction();
         }
     }, timeDiff);
+}
+
+export const validatePhoneNumber = (phoneNumber:string) => {
+    // 使用正则表达式检查手机号码格式
+    const reg = /^1[3456789]\d{9}$/;
+    return reg.test(phoneNumber);
 }
