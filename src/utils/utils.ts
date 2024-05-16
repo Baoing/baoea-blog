@@ -25,7 +25,8 @@ export const copyToClipboard = (content: string) => {
  */
 export function purchaseAtTime(purchaseTime:string, purchaseCount:number, purchaseFunction: ()=> void) {
     // 获取当前时间
-    const now = new Date();
+    // const now = new Date();
+    const now = new Date(new Date().getTime() + (24 * 60 * 60 * 1000));
     const currentTime = now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds();
 
     // 计算距离抢购时间的时间差（毫秒）

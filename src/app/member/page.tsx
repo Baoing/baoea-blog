@@ -35,7 +35,7 @@ import {
 import {toast} from "sonner";
 import {Table} from "@nextui-org/table";
 import {Modal, ModalBody, ModalContent, ModalFooter, ModalHeader} from "@nextui-org/modal";
-import {Time} from "@internationalized/date";
+import {parseAbsoluteToLocal, Time} from "@internationalized/date";
 import {ClockCircleLinearIcon} from "@/app/components/Icons";
 import {Input} from "@nextui-org/input";
 import {useState} from "react";
@@ -45,9 +45,11 @@ import {copyToClipboard, purchaseAtTime} from "@/utils/utils";
 export default function Member() {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
   const [maxCount, setMaxCount] = useState(10)
-  const [time, setTime] = useState(new Time(11, 0))
+  const [time, setTime] = useState(new Time(0, 0))
+
   const [couponIds, setCouponIds] = useState({couponid0: "", couponid1: "", couponid2: "", couponid5: ""})
 
+  new Time(11, 0)
   /**
    * 下单
    * @param token
