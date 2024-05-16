@@ -133,11 +133,12 @@ export default function Member() {
   return <Observer>{() => {
     // 定时抢购
     const handleFlashSale = () => {
-      const body = getParkingCoupon()
       purchaseAtTime(time.toString(), maxCount, () => {
         toast("开始抢购！")
         MembersStore.users.map(user => {
-          handleAddbooking(user.token, body)
+          handleAddbooking(user.token, getParkingCoupon())
+          handleAddbooking(user.token, get1Himalaya())
+          handleAddbooking(user.token, getGoldCard())
         })
       })
     }
@@ -228,7 +229,6 @@ export default function Member() {
 
       <Divider className="mb-4"/>
 
-
       <Card>
         <CardHeader className="flex gap-3">
           <div className="flex flex-col">
@@ -239,7 +239,7 @@ export default function Member() {
         <Divider/>
         <CardBody className="flex gap-2 flex-row flex-wrap">
           <Button className="w-[100px]" onPress={onOpen}>
-            抢购停车券(9)
+            抢购停车券(9)+1积分喜马拉雅
           </Button>
         </CardBody>
       </Card>
