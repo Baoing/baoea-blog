@@ -1,7 +1,7 @@
 "use client"
 
 import PageContainer from "@/app/components/PageContainer";
-import {Button, TableBody, TableCell, TableColumn, TableHeader, TableRow, useDisclosure} from "@nextui-org/react";
+import {Button, TableBody, TableCell, TableColumn, TableHeader, TableRow} from "@nextui-org/react";
 import {Table} from "@nextui-org/table";
 import stores from "@/stores";
 import {Observer} from "mobx-react"
@@ -24,10 +24,12 @@ const Page = () => {
           导出账户
         </Button>
 
+        <Button variant="shadow" onPress={()=> copyToClipboard(MembersStore.exportTokensAndPhones())}>
+          导出账户+手机号
+        </Button>
+
         <RemoveAllAccount />
       </div>
-
-
 
       <Table className={"mt-4"} align={"center"} aria-label="Example static collection table">
         <TableHeader>
@@ -37,7 +39,6 @@ const Page = () => {
           <TableColumn>积分</TableColumn>
           <TableColumn>Token</TableColumn>
           <TableColumn>操作</TableColumn>
-
         </TableHeader>
         <TableBody emptyContent={"暂未登录账户"}>
           {

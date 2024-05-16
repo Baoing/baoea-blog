@@ -35,8 +35,12 @@ export default class MembersStore implements MembersStoreProps {
     makeAutoObservable(this)
   }
 
+  /**
+   * 添加会员
+   * @param token
+   */
   @action.bound
-  addMember(token:string) {
+  addMember(token:string, isInit?: boolean) {
     if(!token) return
     const noToken = this.users.findIndex(user=> user.token === token) === -1
 
@@ -51,8 +55,10 @@ export default class MembersStore implements MembersStoreProps {
             this.users = [...this.users, {token, data}]
           }
 
-          const tokens = this.users.map(item=>item.token).toString()
-          isBrowser() && window.localStorage.setItem("bao-tokens", tokens)
+          if (isBrowser() && !isInit){
+            const tokens = this.users.map(item=>item.token).toString()
+            window.localStorage.setItem("bao-tokens", tokens)
+          }
 
           // getCoupon(token).then((res)=>{
           //   if(res.code===200){
@@ -76,7 +82,7 @@ export default class MembersStore implements MembersStoreProps {
           //   }
           // });
         }else{
-          toast.error(msg + ", Token错误或者已过期")
+          toast.error(msg + ", Token错误或者已过期。Token:" + token)
         }
       })
     }
@@ -90,17 +96,36 @@ export default class MembersStore implements MembersStoreProps {
     }
   }
 
+  /**
+   * 导出token
+   */
   @action.bound
   exportTokens() {
     return this.users.map(user=> user.token).toString()
   }
 
+
+  /**
+   * 导出token和手机号
+   */
   @action.bound
+  exportTokensAndPhones() {
+    if(this.users.length){
+      const data = this.users.map(user=> {
+        return {token: user.token, phone: user.data.mobile}
+      })
+      return JSON.stringify(data)
+    }else{
+      return ""
+    }
+  }
+
   /**
    * 导入账户
    * @param tokens tokens
    * @param isCover 是否覆盖
    */
+  @action.bound
   importTokens(tokens: string, isCover?:boolean) {
     if(isCover){
       this.users = []
@@ -109,11 +134,11 @@ export default class MembersStore implements MembersStoreProps {
       this.addMember(token)
     })
   }
-  @action.bound
   /**
    * 移除账户
    * @param token token
    */
+  @action.bound
   removeUsers(token?: string) {
     if(token === undefined){
       this.users = []

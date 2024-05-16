@@ -14,7 +14,7 @@ export default function AddAccount() {
 
       <Modal placement={"top-center"} isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
-          {(onClose) => (
+          {() => (
             <>
               <ModalHeader className="flex flex-col gap-1">添加账户</ModalHeader>
               <ModalBody>

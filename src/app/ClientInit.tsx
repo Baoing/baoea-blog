@@ -7,9 +7,8 @@ import stores from "@/stores";
 const ClientInit = () => {
   const {MembersStore} = stores
   useEffect(()=>{
-    console.log(121212)
     const tokens = isBrowser() ? window.localStorage.getItem("bao-tokens") : ""
-    tokens && tokens.split(",").map(token=> MembersStore.addMember(token))
+    tokens && tokens.split(",").map(token=> MembersStore.addMember(token, true))
   }, [])
   return <div />
 }
