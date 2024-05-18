@@ -66,6 +66,11 @@ export default function NavBar() {
             丽苼活动
           </Link>
         </NavbarItem>
+        <NavbarItem isActive={activeItem === "/draw"}>
+          <Link color={activeItem === "/draw" ? undefined :"foreground"} href="/draw">
+            自动抽奖
+          </Link>
+        </NavbarItem>
         <NavbarItem isActive={activeItem === "/accounts"}>
           <Link color={activeItem === "/accounts" ? undefined :"foreground"} href="/accounts">
             账户管理
@@ -83,6 +88,7 @@ export default function NavBar() {
         {[
           {title: "会员购", path: "/member"},
           {title: "丽苼活动", path: "/lisheng"},
+          {title: "丽苼活动", path: "/draw"},
           {title: "账户管理", path: "/accounts"},
         ].map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>

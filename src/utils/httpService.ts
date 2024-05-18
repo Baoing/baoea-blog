@@ -2,9 +2,9 @@ import axios, { AxiosResponse, AxiosError } from 'axios';
 
 
 // 封装GET请求
-export async function get<T>(url: string): Promise<T> {
+export async function get<T>(url: string,headers?: any): Promise<T> {
   try {
-    const response: AxiosResponse<T> = await axios.get(url);
+    const response: AxiosResponse<T> = await axios.get(url, {headers});
     return response.data;
   } catch (error) {
     console.error('Error while making GET request:', error);

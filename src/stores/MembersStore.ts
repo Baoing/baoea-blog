@@ -1,8 +1,15 @@
 import {action, makeAutoObservable, observable} from "mobx"
-import {getCoupon, getCoupon100, getCoupon300, getInfoByToken} from "@/utils/api";
+import {draw, geDrawChance, getCoupon, getCoupon100, getCoupon300, getInfoByToken} from "@/utils/api";
 import {toast} from "sonner";
 import {isBrowser} from "@/utils/utils";
-import {b} from "@nextui-org/slider/dist/use-slider-64459b54";
+
+type PriceTypePriceType = {
+  giftType: number
+  id:number
+  img:string
+  reasonType:null |number
+  result: number
+}
 
 export type Member = {
   token: string
@@ -14,6 +21,8 @@ export type Member = {
     mobile: string
     nickname: null | string
   },
+  drawChanges?: number
+  prizes?: PriceTypePriceType[]
 }
 type couponType = {
   name: string
@@ -150,4 +159,63 @@ export default class MembersStore implements MembersStoreProps {
       isBrowser() && window.localStorage.setItem("bao-tokens", tokens)
     }
   }
+
+  /**
+   * 更新抽奖
+   * @param token token
+   */
+  @action.bound
+  updateUserDraw(token?: string) {
+    this.users.forEach(user=> {
+      geDrawChance(user.token).then(res=>{
+        if(res.code === 200){
+          user.drawChanges = res.data.chance
+        }
+      })
+    })
+  }
+  /**
+   * 自动抽奖
+   */
+  @action.bound
+  autoDraw() {
+    this.users.forEach(user=> {
+      if(user.drawChanges && user.drawChanges > 0){
+        this.draw(user)
+      }
+    })
+  }
+  /**
+   * 自动抽奖
+   */
+  @action.bound
+  draw(user: Member) {
+    console.log(user)
+    draw(user.token).then(res=>{
+      if(res.code === 200){
+        if(res.data.id === 1156){
+          toast.success(`手机号：${user.data.mobile}抽到了奈雪100元券`)
+        }
+        if(res.data.id === 1158){
+          toast.success(`手机号：${user.data.mobile}抽到了芒果年卡`)
+        }
+        if(user.prizes){
+          user.prizes.push(res.data)
+        }else{
+          user.prizes = [res.data]
+        }
+        if(user.drawChanges){
+          user.drawChanges = user.drawChanges - 1
+          // 还有次数，继续抽奖
+          if(user.drawChanges && user.drawChanges > 0){
+            setTimeout(()=>{
+              this.draw(user)
+            }, 3000)
+          }
+        }
+      }
+    })
+  }
+
+
 }

@@ -1,4 +1,4 @@
-import {post} from './httpService';
+import {post, get} from './httpService';
 import {clientInfo} from "@/app/member/metadata";
 
 const MALL_URL = "https://malls.bestwehotel.com/plateno_mall"
@@ -204,6 +204,39 @@ export async function getLishengLingqu(mobile: string, code?: string) {
   let url = `https://mkt.bestwehotel.com/proxy/mkt-toolkit/gift-act/member/login-and-get?actId=LBL00343&mobile=${mobile}&vcode=` + code
   try {
     return await post<any>('/api/proxy', {
+      url
+    })
+    // 在这里对返回的数据进行处理
+  } catch (error) {
+    console.error('POST请求失败:', error);
+  }
+}
+
+export async function geDrawChance(token: string) {
+  let url = `https://activity.bestwehotel.com/activity/module/draw/queryChance?moduleId=5984`
+  try {
+    return await get<any>('/api/proxy?url='+url, getHeaders(token))
+    // 在这里对返回的数据进行处理
+  } catch (error) {
+    console.error('POST请求失败:', error);
+  }
+}
+export async function draw(token: string) {
+  let url = `https://activity.bestwehotel.com/activity/module/draw?moduleId=5984`
+  try {
+    return await get<any>('/api/proxy?url='+url, getHeaders(token))
+    // 在这里对返回的数据进行处理
+  } catch (error) {
+    console.error('POST请求失败:', error);
+  }
+}
+
+export async function geLuckDraw() {
+  let url = `https://activity.bestwehotel.com/activity/module/allInfo`
+  try {
+    return await post<any>('/api/proxy',{
+      activityId: "181444",
+      channel: 2001,
       url
     })
     // 在这里对返回的数据进行处理
