@@ -30,7 +30,7 @@ import {
   get49Mango,
   getDSNCoupon,
   getParkingCoupon,
-  getGoldCard
+  getGoldCard, getParkingCoupon20
 } from "./metadata"
 import {toast} from "sonner";
 import {Table} from "@nextui-org/table";
@@ -138,9 +138,7 @@ export default function Member() {
       purchaseAtTime(time.toString(), maxCount, () => {
         toast("开始抢购！")
         MembersStore.users.map(user => {
-          handleAddbooking(user.token, getParkingCoupon())
-          handleAddbooking(user.token, get1Himalaya())
-          handleAddbooking(user.token, getGoldCard())
+          handleAddbooking(user.token, getParkingCoupon20())
         })
       })
     }
@@ -168,6 +166,10 @@ export default function Member() {
                     <CardBody className="flex gap-2 flex-row flex-wrap">
                       <Button className="w-[100px]" onClick={() => handleAddbooking(user.token, getParkingCoupon())}>
                         购买停车券(9)
+                      </Button>
+
+                      <Button className="w-[100px]" onClick={() => handleAddbooking(user.token, getParkingCoupon20())}>
+                        购买新停车券(9)
                       </Button>
 
                       <Button className="w-[160px]"
@@ -240,8 +242,8 @@ export default function Member() {
         </CardHeader>
         <Divider/>
         <CardBody className="flex gap-2 flex-row flex-wrap">
-          <Button className="w-[100px]" onPress={onOpen}>
-            抢购停车券(9)+1积分喜马拉雅
+          <Button className="w-[200px]" onPress={onOpen}>
+            【新】抢购停车券(9)
           </Button>
         </CardBody>
       </Card>
