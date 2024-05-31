@@ -44,6 +44,8 @@ export function purchaseAtTime(purchaseTime:string, purchaseCount:number, purcha
     // 输出距离下一次抢购的时间
     console.log('距离下一次抢购的时间为：' + (timeDiff / 1000) + '秒');
 
+    toast("距离执行定时抢购的时间："+(timeDiff / 1000 / 60).toFixed(2) + "分钟")
+
     // 设置定时器，在抢购时间触发
     setTimeout(() => {
         console.log('开始抢购！');

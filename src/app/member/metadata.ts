@@ -115,6 +115,57 @@ export const getParkingCoupon20 = () => {
 }
 
 /**
+ * 获取抢购停车券20的data
+ */
+export const getHeping = () => {
+  return {
+    "clientInfo": clientInfo,
+    "chainID": null,
+    "packetReduceMoney": null,
+    "activityReduceAmount": 0,
+    "point": 19999, // 这个不一样
+    "totalAmount": 0,
+    "consigneeName": "",
+    "consigneeMobile": "",
+    "consigneeAddress": "",
+    "chanelId": 101,
+    "shippingType": 1,
+    "resource": 2001,
+    "couponId": "",
+    "province": "",
+    "city": "",
+    "area": "",
+    "offline": 0,
+    "goodsList": [
+      {
+        "goodsId": 179749, // 商品id不一样
+        "quantity": 1,
+        "priceType": 3,
+        "gift": 0,
+        "present": 0,
+        "priceStrategy": 20088, // 价格策略
+        "entrance": null,
+        "pureIntegralId": null,
+        "pointActivityId": null, // 活动id，有些是有活动的
+        "usePointNums": "19999", // 所需积分
+        "activityId": "20147", // 互动id
+        "activityType": "1" // 活动类型
+      }
+    ],
+    "orderResource": "1",
+    "deductPoint": 9, // 所需积分
+    "isVirtual": 1,
+    "rechargeAccount": "",
+    "postageCouponId": "",
+    "discountType": 0,
+    "flowType": 0,
+    "postageCouponNum": 0,
+    "orderRemark": "",
+    "orderRequiredValue": "[]"
+  }
+}
+
+/**
  * 获取金卡的data
  */
 export const getGoldCard = () => {

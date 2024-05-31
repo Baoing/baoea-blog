@@ -30,7 +30,7 @@ import {
   get49Mango,
   getDSNCoupon,
   getParkingCoupon,
-  getGoldCard, getParkingCoupon20
+  getGoldCard, getParkingCoupon20, getHeping
 } from "./metadata"
 import {toast} from "sonner";
 import {Table} from "@nextui-org/table";
@@ -44,8 +44,8 @@ import {copyToClipboard, purchaseAtTime} from "@/utils/utils";
 
 export default function Member() {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
-  const [maxCount, setMaxCount] = useState(10)
-  const [time, setTime] = useState(new Time(0, 0))
+  const [maxCount, setMaxCount] = useState(2)
+  const [time, setTime] = useState(new Time(11, 0))
 
   const [couponIds, setCouponIds] = useState({couponid0: "", couponid1: "", couponid2: "", couponid5: ""})
 
@@ -138,7 +138,7 @@ export default function Member() {
       purchaseAtTime(time.toString(), maxCount, () => {
         toast("开始抢购！")
         MembersStore.users.map(user => {
-          handleAddbooking(user.token, getParkingCoupon20())
+          handleAddbooking(user.token, getHeping())
         })
       })
     }
@@ -242,9 +242,14 @@ export default function Member() {
         </CardHeader>
         <Divider/>
         <CardBody className="flex gap-2 flex-row flex-wrap">
+          {/*<Button className="w-[200px]" onPress={onOpen}>*/}
+          {/*  【新】抢购停车券(9)*/}
+          {/*</Button>*/}
+
           <Button className="w-[200px]" onPress={onOpen}>
-            【新】抢购停车券(9)
+            和平饭店19999
           </Button>
+
         </CardBody>
       </Card>
 
