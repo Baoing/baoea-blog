@@ -116,6 +116,7 @@ export const getParkingCoupon20 = () => {
 
 /**
  * 获取抢购停车券20的data
+ * https://malls.bestwehotel.com/#/goodsDetail?productId=79129&priceStrategy=20210&sid=957564&sid=365352
  */
 export const getHeping = () => {
   return {
@@ -153,7 +154,59 @@ export const getHeping = () => {
       }
     ],
     "orderResource": "1",
-    "deductPoint": 9, // 所需积分
+    "deductPoint": 19999, // 所需积分
+    "isVirtual": 1,
+    "rechargeAccount": "",
+    "postageCouponId": "",
+    "discountType": 0,
+    "flowType": 0,
+    "postageCouponNum": 0,
+    "orderRemark": "",
+    "orderRequiredValue": "[]"
+  }
+}
+
+/**
+ * 获取抢购停车券20的data
+ */
+export const getHeping2 = () => {
+  return {
+    "clientInfo": clientInfo,
+    "chainID": null,
+    "packetReduceMoney": null,
+    "activityReduceAmount": 0,
+    "point": 1, // 这个不一样
+    "totalAmount": 0,
+    "consigneeName": "",
+    "consigneeMobile": "",
+    "consigneeAddress": "",
+    "chanelId": 101,
+    "shippingType": 1,
+    "resource": 3001,
+    "couponId": "",
+    "province": "",
+    "city": "",
+    "area": "",
+    "offline": 0,
+    "goodsList": [
+      {
+        "goodsId": 179074, // 商品id不一样
+        "quantity": 1,
+        "priceType": 3,
+        "gift": 0,
+        "present": 0,
+        "priceStrategy": 20088, // 价格策略
+        // "priceStrategy": 20145, // 价格策略
+        "entrance": null,
+        "pureIntegralId": null,
+        "pointActivityId": null, // 活动id，有些是有活动的
+        "usePointNums": "1", // 所需积分
+        "activityId": "20145", // 互动id
+        "activityType": "1" // 活动类型
+      }
+    ],
+    "orderResource": "1",
+    "deductPoint": 1, // 所需积分
     "isVirtual": 1,
     "rechargeAccount": "",
     "postageCouponId": "",

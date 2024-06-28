@@ -26,9 +26,11 @@ export const copyToClipboard = (content: string) => {
 export function purchaseAtTime(purchaseTime:string, purchaseCount:number, purchaseFunction: ()=> void) {
     // 获取当前时间
     // const now = new Date();
+    console.log(new Date())
     const now = new Date(new Date().getTime() + (24 * 60 * 60 * 1000));
     const currentTime = now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds();
 
+    console.log(currentTime <= purchaseTime)
     // 计算距离抢购时间的时间差（毫秒）
     let timeDiff;
     if (currentTime <= purchaseTime) {
@@ -49,11 +51,16 @@ export function purchaseAtTime(purchaseTime:string, purchaseCount:number, purcha
     // 设置定时器，在抢购时间触发
     setTimeout(() => {
         console.log('开始抢购！');
-        // 调用传入的抢购执行函数
-        for (let i = 1; i <= purchaseCount; i++) {
-            console.log('第 ' + i + ' 次抢购');
+
+        let i = purchaseCount
+        const purchaseInterval = setInterval(() => {
+            console.log('第 ' + (purchaseCount - i + 1) + ' 次抢购');
             purchaseFunction();
-        }
+            i--;
+            if (i <= 0) {
+                clearInterval(purchaseInterval);
+            }
+        }, 800); // 每500毫秒执行一次抢购函数
     }, timeDiff);
 }
 

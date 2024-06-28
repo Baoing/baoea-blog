@@ -30,12 +30,12 @@ import {
   get49Mango,
   getDSNCoupon,
   getParkingCoupon,
-  getGoldCard, getParkingCoupon20, getHeping
+  getGoldCard, getParkingCoupon20, getHeping, getHeping2
 } from "./metadata"
 import {toast} from "sonner";
 import {Table} from "@nextui-org/table";
 import {Modal, ModalBody, ModalContent, ModalFooter, ModalHeader} from "@nextui-org/modal";
-import {parseAbsoluteToLocal, Time} from "@internationalized/date";
+import {Time} from "@internationalized/date";
 import {ClockCircleLinearIcon} from "@/app/components/Icons";
 import {Input} from "@nextui-org/input";
 import {useState} from "react";
@@ -44,7 +44,7 @@ import {copyToClipboard, purchaseAtTime} from "@/utils/utils";
 
 export default function Member() {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
-  const [maxCount, setMaxCount] = useState(2)
+  const [maxCount, setMaxCount] = useState(10)
   const [time, setTime] = useState(new Time(11, 0))
 
   const [couponIds, setCouponIds] = useState({couponid0: "", couponid1: "", couponid2: "", couponid5: ""})
@@ -167,6 +167,9 @@ export default function Member() {
                       <Button className="w-[100px]" onClick={() => handleAddbooking(user.token, getParkingCoupon())}>
                         购买停车券(9)
                       </Button>
+                      <Button className="w-[100px]" onClick={() => handleAddbooking(user.token, getHeping2())}>
+                        测试
+                      </Button>
 
                       <Button className="w-[100px]" onClick={() => handleAddbooking(user.token, getParkingCoupon20())}>
                         购买新停车券(9)
@@ -277,7 +280,7 @@ export default function Member() {
                   <Input
                     label="每个号最大抢购次数"
                     type={"number"}
-                    value={maxCount}
+                    value={String(maxCount)}
                     onChange={(e) => {
                       setMaxCount(Number(e.target.value))
                     }}
